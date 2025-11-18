@@ -1,347 +1,260 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/outline';
 
-// --- SVG Icons for property details ---
-const BedIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
-);
-const BathIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-);
-const AreaIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5" /></svg>
-);
-const MapIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
-);
-const ListIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
-);
-
-// --- Reusable Property Card Component ---
-const PropertyCard = ({ property, isSelected, onClick }) => {
-  return (
-    <div 
-      className={`bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 cursor-pointer ${
-        isSelected ? 'ring-2 ring-blue-500 shadow-2xl' : 'hover:shadow-2xl hover:-translate-y-1'
-      }`}
-      onClick={() => onClick(property)}
-    >
-      <div className="relative h-48">
-        <img 
-          className="h-full w-full object-cover" 
-          src={property.imageUrl} 
-          alt={property.title} 
-          onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/600x400/e2e8f0/64748b?text=Image+Not+Available"; }}
-        />
-        <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full">For Sale</span>
-      </div>
-      <div className="p-4">
-        <p className="text-xl font-bold text-blue-700 mb-1">{property.price}</p>
-        <h3 className="text-lg font-semibold text-gray-800 mb-1 truncate">{property.title}</h3>
-        <p className="text-sm text-gray-500 truncate mb-3">{property.address}</p>
-        
-        <div className="flex justify-between items-center text-sm text-gray-600 pt-3 border-t border-gray-100">
-          <div className="flex items-center space-x-1">
-            <BedIcon className="w-4 h-4" />
-            <span>{property.beds} Beds</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <BathIcon className="w-4 h-4" />
-            <span>{property.baths} Baths</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <AreaIcon className="w-4 h-4" />
-            <span>{property.area} m²</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// --- Mock Data for Properties ---
-const properties = [
+// --- MOCK DATA (To make the UI look filled) ---
+const homesYouLike = [
   {
     id: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop',
-    price: 'Rp 2.5 M',
-    title: 'Modern Minimalist House',
-    address: 'Jl. Senopati, Jakarta Selatan',
-    beds: 4,
-    baths: 3,
-    area: 250,
-    lat: -6.2460,
-    lng: 106.8149
+    price: 'IDR 85.000.000.000',
+    location: 'Menteng, Central Jakarta',
+    title: 'Modern Classic Mansion',
+    image: 'https://images.unsplash.com/photo-1600596542815-2495db969ef8?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1512917774080-b3b3676b7e50?q=80&w=2070&auto=format&fit=crop',
-    price: 'Rp 1.8 M',
-    title: 'Cozy Family Home',
-    address: 'Jl. Kemang, Jakarta Selatan',
-    beds: 3,
-    baths: 2,
-    area: 180,
-    lat: -6.2597,
-    lng: 106.8142
+    price: '$4,750,000',
+    location: 'Geilo, Viken, Norway',
+    title: 'Luxury Ski Chalet',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
   },
-  // ... other properties ...
   {
     id: 3,
-    imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop',
-    price: 'Rp 3.1 M',
-    title: 'Luxury Villa with Pool',
-    address: 'Jl. Cilandak, Jakarta Selatan',
-    beds: 5,
-    baths: 4,
-    area: 400,
-    lat: -6.2890,
-    lng: 106.7983
+    price: '€14,500,000',
+    location: 'Umbria, Italy',
+    title: 'Historic Castle Estate',
+    image: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe865?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop',
-    price: 'Rp 1.2 M',
-    title: 'Suburban Starter Home',
-    address: 'Jl. Bintaro, Tangerang Selatan',
-    beds: 2,
-    baths: 2,
-    area: 120,
-    lat: -6.2725,
-    lng: 106.6789
-  },
-  {
-    id: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=1974&auto=format&fit=crop',
-    price: 'Rp 800 Jt',
-    title: 'Classic Townhouse',
-    address: 'Jl. BSD, Tangerang',
-    beds: 3,
-    baths: 2,
-    area: 150,
-    lat: -6.3039,
-    lng: 106.6418
-  },
-  {
-    id: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1600607687939-010a2c70905c?q=80&w=2070&auto=format&fit=crop',
-    price: 'Rp 4.5 M',
-    title: 'Spacious Modern Design',
-    address: 'Jl. Pondok Indah, Jakarta Selatan',
-    beds: 4,
-    baths: 4,
-    area: 350,
-    lat: -6.2577,
-    lng: 106.7808
+    price: '$28,000,000',
+    location: 'Dripping Springs, Texas',
+    title: 'Hill Country Ranch',
+    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80',
   },
 ];
 
-// --- Map Placeholder Component ---
-const MapView = ({ selectedProperty }) => {
-  return (
-    <div className="rounded-xl overflow-hidden relative h-full bg-gray-200">
-      {/* Map Placeholder Image */}
-      <img
-        src="https://placehold.co/1000x800/e9e9e9/b0b0b0?text=Map+Placeholder"
-        alt="Map Placeholder"
-        className="w-full h-full object-cover"
-      />
+const newToMarket = [
+  {
+    id: 5,
+    price: '$700,000',
+    location: 'Marbella, Spain',
+    title: 'Villa in Nueva Andalucia',
+    image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80',
+    tag: 'New 5 days ago'
+  },
+  {
+    id: 6,
+    price: '$75,000,000',
+    location: 'Key Largo, Florida',
+    title: 'Oceanfront Sanctuary',
+    image: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80',
+    tag: 'Video'
+  },
+  {
+    id: 7,
+    price: '$19,750,000',
+    location: 'Franklin, Tennessee',
+    title: 'Southern Estate',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 8,
+    price: '$28,995,000',
+    location: 'Beverly Hills, CA',
+    title: 'Modern Masterpiece',
+    image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
+  },
+];
 
-      {/* Selected Property Info Box */}
-      {selectedProperty && (
-        <div className="absolute bottom-4 left-4 right-4 bg-white rounded-lg shadow-xl p-4 max-w-md animate-entrance" style={{ animationDelay: '150ms' }}>
-          <div className="flex">
-            <img 
-              src={selectedProperty.imageUrl} 
-              alt={selectedProperty.title}
-              className="w-16 h-16 rounded-lg object-cover"
-              onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/100x100/e2e8f0/64748b?text=Img"; }}
-            />
-            <div className="ml-3 flex-1 min-w-0">
-              <h3 className="font-bold text-gray-800 truncate">{selectedProperty.title}</h3>
-              <p className="text-blue-600 font-semibold">{selectedProperty.price}</p>
-              <p className="text-xs text-gray-500 truncate">{selectedProperty.address}</p>
-            </div>
-          </div>
+// --- SUB-COMPONENTS ---
+const ListingCard = ({ item }) => (
+  <div className="group cursor-pointer">
+    <div className="relative h-64 overflow-hidden rounded-lg mb-4">
+      <img 
+        src={item.image} 
+        alt={item.title} 
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+      <div className="absolute top-3 right-3 bg-white p-2 rounded-full hover:bg-gray-100 transition">
+        <HeartIcon className="w-5 h-5 text-black" />
+      </div>
+      {item.tag && (
+        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-black">
+          {item.tag}
         </div>
       )}
-      
-      {/* Map Controls (Placeholder) */}
-      <div className="absolute top-4 right-4 flex flex-col space-y-2">
-        <button className="bg-white p-2 rounded-lg shadow-md hover:bg-gray-50 transition-all duration-300 hover:scale-110">
-          <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-        </button>
-        <button className="bg-white p-2 rounded-lg shadow-md hover:bg-gray-50 transition-all duration-300 hover:scale-110">
-          <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
-        </button>
-      </div>
     </div>
-  );
-};
+    <div>
+      <p className="text-lg font-bold text-black">{item.price}</p>
+      <p className="text-sm text-gray-500">{item.location}</p>
+      <p className="text-sm text-black truncate font-medium mt-1">{item.title}</p>
+    </div>
+  </div>
+);
 
-// --- The Main Property Page Component ---
-const Propertypage = () => {
-  const [selectedProperty, setSelectedProperty] = useState(properties[0]);
-  const [viewMode, setViewMode] = useState('both'); // 'both', 'list', 'map'
-  const [sortBy, setSortBy] = useState('price-low');
-
-  const handlePropertySelect = (property) => {
-    setSelectedProperty(property);
-  };
-
-  const sortedProperties = [...properties].sort((a, b) => {
-    // Basic sorting logic (you can make this more robust)
-    const priceA = parseInt(String(a.price).replace(/[^0-9]/g, '')) * (String(a.price).includes('M') ? 1000 : 1);
-    const priceB = parseInt(String(b.price).replace(/[^0-9]/g, '')) * (String(b.price).includes('M') ? 1000 : 1);
-
-    switch (sortBy) {
-      case 'price-high':
-        return priceB - priceA;
-      case 'price-low':
-        return priceA - priceB;
-      case 'area':
-        return b.area - a.area;
-      default:
-        return a.id - b.id; // 'newest' placeholder
-    }
-  });
-
+const PropertyPage = () => {
   return (
-    <div className="bg-gray-50 min-h-screen" style={{ fontFamily: "'Inter', sans-serif" }}>
-      {/* Font import and animations */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
-        @keyframes fadeInUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(20px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-        .animate-entrance {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-      `}</style>
+    <div className="bg-white min-h-screen">
       
-      {/* Reduced top padding */}
-      <div className="container mx-auto p-4 md:p-8 pt-20 md:pt-24">
-        
-        {/* Header and Controls with animation */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 animate-entrance">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Property Listings
-            </h1>
-            <p className="text-gray-600 mt-1">{properties.length} properties available</p>
-          </div>
-          
-          <div className="flex flex-wrap gap-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-600 text-sm">View:</span>
-              <div className="flex bg-white rounded-lg shadow-sm border border-gray-200">
-                <button 
-                  className={`p-2 rounded-l-lg transition-all duration-300 ${viewMode === 'both' ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100 hover:scale-110'}`}
-                  onClick={() => setViewMode('both')}
-                  title="Split View"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" /></svg>
-                </button>
-                <button 
-                  className={`p-2 transition-all duration-300 ${viewMode === 'list' ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100 hover:scale-110'}`}
-                  onClick={() => setViewMode('list')}
-                  title="List View"
-                >
-                  <ListIcon className="w-5 h-5" />
-                </button>
-                <button 
-                  className={`p-2 rounded-r-lg transition-all duration-300 ${viewMode === 'map' ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100 hover:scale-110'}`}
-                  onClick={() => setViewMode('map')}
-                  title="Map View"
-                >
-                  <MapIcon className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-600 text-sm">Sort by:</span>
-              <select 
-                className="p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="area">Area: Largest First</option>
-                <option value="newest">Newest</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        {/* Content Layout with animation and delay */}
-        <div className="animate-entrance" style={{ animationDelay: '200ms' }}>
-          {viewMode === 'both' ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              
-              {/* Map Section */}
-              <div className="lg:order-2 h-[600px]">
-                <div className="bg-white rounded-xl shadow-lg h-full">
-                  <MapView 
-                    selectedProperty={selectedProperty} 
-                  />
-                </div>
-              </div>
-              
-              {/* Property List Section */}
-              <div className="lg:order-1 h-[600px]">
-                <div className="bg-white rounded-xl shadow-lg p-4 h-full flex flex-col">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4 flex-shrink-0">
-                    Available Properties
-                  </h2>
-                  <div className="space-y-4 overflow-y-auto pr-2 flex-grow">
-                    {sortedProperties.map((property) => (
-                      <PropertyCard 
-                        key={property.id} 
-                        property={property} 
-                        isSelected={selectedProperty?.id === property.id}
-                        onClick={handlePropertySelect}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+      {/* ========================
+          1. HERO SECTION
+      ======================== */}
+      <div className="relative h-[550px] w-full">
+        {/* Background Image */}
+        <img 
+          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80" 
+          alt="Luxury Hero" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
 
-            </div>
-          ) : viewMode === 'list' ? (
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">Available Properties</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedProperties.map((property) => (
-                  <PropertyCard 
-                    key={property.id} 
-                    property={property} 
-                    isSelected={selectedProperty?.id === property.id}
-                    onClick={handlePropertySelect}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : ( // 'map' view
-            <div className="bg-white rounded-xl shadow-lg h-[700px]">
-              <MapView 
-                selectedProperty={selectedProperty} 
+        {/* Hero Content */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-8 shadow-sm">
+            Explore the World's Finest Properties
+          </h1>
+
+          {/* Search Bar (The White Strip) */}
+          <div className="bg-white rounded-lg p-2 flex flex-col md:flex-row items-center gap-2 w-full max-w-4xl shadow-2xl">
+            
+            {/* Input 1: Location */}
+            <div className="flex-1 w-full md:w-auto border-b md:border-b-0 md:border-r border-gray-200 px-4 py-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Location</label>
+              <input 
+                type="text" 
+                placeholder="City, Region, Country" 
+                className="w-full outline-none text-gray-900 placeholder-gray-400"
               />
             </div>
-          )}
+
+            {/* Input 2: Price */}
+            <div className="w-full md:w-48 border-b md:border-b-0 md:border-r border-gray-200 px-4 py-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Price</label>
+              <div className="flex items-center justify-between cursor-pointer text-gray-900">
+                <span>Any Price</span>
+                <span className="text-xs">▼</span>
+              </div>
+            </div>
+
+            {/* Input 3: Beds */}
+            <div className="w-full md:w-40 px-4 py-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Beds</label>
+              <div className="flex items-center justify-between cursor-pointer text-gray-900">
+                <span>Any Beds</span>
+                <span className="text-xs">▼</span>
+              </div>
+            </div>
+
+            {/* Search Button */}
+            <button className="w-full md:w-auto bg-emerald-900 hover:bg-emerald-800 text-white px-8 py-4 rounded-md font-medium transition">
+              Search
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* ========================
+          2. TRUSTED BRANDS
+      ======================== */}
+      <div className="bg-gray-50 border-b border-gray-200 py-8">
+        <div className="max-w-screen-2xl mx-auto px-8">
+          <p className="text-center text-xs font-bold text-gray-400 tracking-widest uppercase mb-6">
+            Trusted by the world's best agencies
+          </p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale">
+            {/* Using text as placeholders for logos to avoid broken images */}
+            <span className="text-xl font-serif font-bold">Sotheby's</span>
+            <span className="text-xl font-serif font-bold">Christie's</span>
+            <span className="text-xl font-serif font-bold">Knight Frank</span>
+            <span className="text-xl font-serif font-bold">Savills</span>
+            <span className="text-xl font-serif font-bold">Coldwell Banker</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ========================
+          3. HOMES YOU'LL LOVE
+      ======================== */}
+      <section className="py-16 px-4 md:px-8 max-w-screen-2xl mx-auto">
+        <div className="flex justify-between items-end mb-8">
+          <h2 className="text-3xl font-serif text-black">Homes You'll Love</h2>
+          <button className="text-sm font-bold text-gray-600 hover:text-black flex items-center gap-2">
+            View all <span className="text-xs">❯</span>
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {homesYouLike.map((item) => (
+            <ListingCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
+      {/* ========================
+          4. WEEKLY HIGHLIGHT
+      ======================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Text Side */}
+            <div>
+              <p className="font-serif text-2xl md:text-3xl mb-4">Weekly Highlight</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Vesoul, Bourgogne-Franche-Comté, France
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                In the heart of the Haute-Saône region, the charming small town of Filain, 
+                nestled between Vesoul and Rioz, is home to this 15th-century gem, 
+                a listed Historic Monument: the Château de Filain.
+              </p>
+              <button className="text-black font-bold border-b-2 border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition">
+                Read more
+              </button>
+
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <p className="text-2xl font-bold">$2,086,421</p>
+                <p className="text-sm text-gray-500">10 Beds • 3 Baths • 1500 Sqm</p>
+              </div>
+            </div>
+
+            {/* Image Side */}
+            <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl">
+              <img 
+                src="https://images.unsplash.com/photo-1599809275371-b03330ff3536?auto=format&fit=crop&w=1200&q=80" 
+                alt="Chateau" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute top-4 right-4 bg-white p-2 rounded-full">
+                <HeartIcon className="w-6 h-6 text-black" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================
+          5. NEW TO MARKET
+      ======================== */}
+      <section className="py-16 px-4 md:px-8 max-w-screen-2xl mx-auto">
+        <div className="flex justify-between items-end mb-8">
+          <h2 className="text-3xl font-serif text-black">New To The Market</h2>
+          <div className="flex gap-2">
+             <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">❮</button>
+             <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">❯</button>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {newToMarket.map((item) => (
+            <ListingCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 };
 
-export default Propertypage;
+export default PropertyPage;

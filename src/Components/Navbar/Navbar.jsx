@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // <--- 1. IMPORT ADDED HERE
 
 // Inline SVG Icons for simplicity
 const MenuIcon = (props) => (
@@ -56,15 +57,15 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
-    { name: 'Real Estate', href: '#' },
-    { name: 'Cars', href: '#' },
-    { name: 'Watches', href: '#' },
-    { name: 'Yachts', href: '#' },
-    { name: 'Motorcycles', href: '#' },
-    { name: 'Helicopters', href: '#' },
-    { name: 'Jewelry', href: '#' },
-    { name: 'Collectibles', href: '#' },
-    { name: 'Rentals', href: '#' },
+    { name: 'Buy Property', href: '#' },
+    { name: 'New Projects', href: '#' },
+    { name: 'Luxury Houses', href: '#' },
+    { name: 'Commertial', href: '#' },
+    { name: 'Land', href: '#' },
+    { name: 'KPR', href: '#' },
+    { name: 'Neighborhoods', href: '#' },
+    { name: 'Sell', href: '#' },
+    { name: 'Agents', href: '#' },
     { name: 'Journal', href: '#' },
   ];
 
@@ -112,9 +113,29 @@ const Navbar = () => {
               >
                 <MenuIcon />
               </button>
-              <a href="#" className="text-2xl font-serif tracking-wider">
-                UrbanLink
-              </a>
+              
+              {/* --- 2. UPDATED LOGO SECTION --- */}
+              <div className="flex items-baseline gap-3">
+                <Link to="/" className="text-2xl font-serif tracking-wider">
+                  UrbanLink
+                </Link>
+                
+                {/* "Back to Homepage" Link */}
+                <Link 
+                  to="/" 
+                  className={`
+                    hidden md:block text-[10px] font-medium uppercase tracking-wide 
+                    transition-colors border-l pl-3
+                    ${isScrolled 
+                      ? 'border-gray-300 text-gray-500 hover:text-black' 
+                      : 'border-white/30 text-gray-300 hover:text-white'
+                    }
+                  `}
+                >
+                  Back to Homepage
+                </Link>
+              </div>
+
             </div>
 
             {/* Right Section */}
@@ -176,9 +197,10 @@ const Navbar = () => {
         <div className="fixed inset-0 z-50 bg-black bg-opacity-95 text-white flex flex-col p-4">
           {/* Mobile Menu Header */}
           <div className="flex justify-between items-center mb-8">
-            <a href="#" className="text-2xl font-serif tracking-wider">
+            {/* Updated to Link for consistency */}
+            <Link to="/" className="text-2xl font-serif tracking-wider" onClick={() => setIsMobileMenuOpen(false)}>
               UrbanLink
-            </a>
+            </Link>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white hover:text-gray-300 transition-colors"

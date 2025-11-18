@@ -10,8 +10,8 @@ import Footer from './Components/Footer/Footer.jsx';
 import Homepage from './pages/Homepage.jsx';
 import Propertypage from './pages/Propertypage.jsx';
 import KprCalculator from './pages/KPR.jsx';
-import SellPropertyForm from './pages/JualRUmah.jsx';
-
+import SellPropertyForm from './pages/JualRumah.jsx';
+import CityListings from './pages/CityListings.jsx';
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/property" element={<Propertypage />} />
             <Route path= "/KPR" element={<KprCalculator/>} />
             <Route path= "/jualrumah" element={<SellPropertyForm/>} />
-
+            <Route path="/listings/:cityName" element={<CityListings />} />
           </Routes>
         </main>
         

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // --- Imports needed for this component ---
 // FIX 1: Added HeartIcon, ChevronLeftIcon, and ChevronRightIcon
@@ -14,22 +15,22 @@ import {
 //=================================================================
 const categoriesData = [
   {
-    name: 'Real Estate.',
+    name: 'Jakarta',
     listings: '602,225 LISTINGS',
     imageUrl: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
   },
   {
-    name: 'Cars',
+    name: 'Tanggerang',
     listings: '10,008 LISTINGS',
     imageUrl: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
   },
   {
-    name: 'Yachts',
+    name: 'Bogor',
     listings: '904 LISTINGS',
     imageUrl: 'https://images.unsplash.com/photo-1563802330831-a89c3660a9f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
   },
   {
-    name: 'Jets',
+    name: 'Bali',
     listings: '33 LISTINGS',
     imageUrl: 'https://images.unsplash.com/photo-1559030623-0234b1d0db16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1824&q=80',
   },
@@ -54,7 +55,7 @@ const CategoryCard = ({ name, listings, imageUrl }) => (
   </div>
 );
 
-// We rename this component to 'Categories'
+// We rename this component to 'Categories' 🤯
 const Categories = () => {
   return (
     <section className="bg-white py-16 px-4 md:px-8">
@@ -64,12 +65,22 @@ const Categories = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categoriesData.map((category) => (
-            <CategoryCard
-              key={category.name}
-              name={category.name}
-              listings={category.listings}
-              imageUrl={category.imageUrl}
-            />
+            
+            // --- 2. THIS IS WHERE WE CONNECT IT ---
+            // We wrap the card in a Link. 
+            // When name is "Jakarta", the link becomes "/listings/jakarta"
+            <Link 
+              key={category.name} 
+              to={`/listings/${category.name.toLowerCase()}`}
+              className="block"
+            >
+              <CategoryCard
+                name={category.name}
+                listings={category.listings}
+                imageUrl={category.imageUrl}
+              />
+            </Link>
+
           ))}
         </div>
       </div>
