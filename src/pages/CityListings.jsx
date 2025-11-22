@@ -1,7 +1,6 @@
-
 import { Link } from 'react-router-dom';
 import React, { useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { 
   HeartIcon, 
   ChevronLeftIcon, 
@@ -113,6 +112,7 @@ const ListingCard = ({ item }) => (
 // 6. MAIN PAGE COMPONENT
 // ==========================================
 const CityListings = () => {
+  const navigate = useNavigate();
   const { cityName } = useParams();
   const trendingRef = useRef(null);
   const newToMarketRef = useRef(null);
@@ -155,7 +155,9 @@ const CityListings = () => {
               <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Beds</label>
               <div className="flex items-center justify-between cursor-pointer text-gray-900 font-medium"><span>Any Beds</span><span className="text-xs">▼</span></div>
             </div>
-            <button className="w-full md:w-auto bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-md font-bold text-sm transition uppercase tracking-wide">Search</button>
+            <button
+             onClick={() => navigate('/search')} 
+             className="w-full md:w-auto bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-md font-bold text-sm transition uppercase tracking-wide">Search</button>
           </div>
         </div>
       </div>

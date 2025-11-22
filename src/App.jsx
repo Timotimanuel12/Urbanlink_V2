@@ -12,6 +12,7 @@ import Propertypage from './pages/Propertypage.jsx';
 import KprCalculator from './pages/KPR.jsx';
 import SellPropertyForm from './pages/JualRumah.jsx';
 import CityListings from './pages/CityListings.jsx';
+import SearchResults from './pages/SearchResults.jsx';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path= "/KPR" element={<KprCalculator/>} />
             <Route path= "/jualrumah" element={<SellPropertyForm/>} />
             <Route path="/listings/:cityName" element={<CityListings />} />
+            <Route path="/search" element={<SearchResults />} />     
           </Routes>
         </main>
         
