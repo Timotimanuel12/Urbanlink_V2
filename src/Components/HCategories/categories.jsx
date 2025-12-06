@@ -16,24 +16,24 @@ import {
 const slugify = (s) => s.toLowerCase().replace(/\s+/g, '-');
 
 const categoriesData = [
-  { name: 'Jakarta Barat', listings: '12,341 LISTINGS' },
-  { name: 'Jakarta Selatan', listings: '24,508 LISTINGS' },
-  { name: 'Jakarta Utara', listings: '10,112 LISTINGS' },
-  { name: 'Jakarta Pusat', listings: '8,932 LISTINGS' },
-  { name: 'Jakarta Timur', listings: '9,751 LISTINGS' },
-  { name: 'Kota Tangerang', listings: '7,004 LISTINGS' },
-  { name: 'Kabupaten Tangerang', listings: '5,890 LISTINGS' },
-  { name: 'Tangerang Selatan', listings: '11,205 LISTINGS' },
-  { name: 'Bekasi', listings: '13,402 LISTINGS' },
-  { name: 'Cibubur', listings: '4,231 LISTINGS' },
-  { name: 'Bogor', listings: '904 LISTINGS' },
-  { name: 'Depok', listings: '6,084 LISTINGS' },
+  { name: 'Jakarta Barat', listings: '12,341 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1502005229762-cf1b2c8cdac0?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Jakarta Selatan', listings: '24,508 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1600585154340-9b04b3a86c34?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Jakarta Utara', listings: '10,112 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Jakarta Pusat', listings: '8,932 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Jakarta Timur', listings: '9,751 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Kota Tangerang', listings: '7,004 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Kabupaten Tangerang', listings: '5,890 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Tangerang Selatan', listings: '11,205 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Bekasi', listings: '13,402 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Cibubur', listings: '4,231 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Bogor', listings: '904 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe865?auto=format&fit=crop&w=1200&q=80' },
+  { name: 'Depok', listings: '6,084 LISTINGS', imageUrl: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80' },
 ];
 
 const CategoryCard = ({ name, listings, imageUrl }) => (
   <div className="relative group h-[500px] rounded-lg overflow-hidden cursor-pointer">
     <img
-      src={`https://placehold.co/600x800/333/FFF?text=${name}`}
+      src={imageUrl || `https://placehold.co/600x800/333/FFF?text=${name}`}
       alt={name}
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
     />
@@ -53,9 +53,7 @@ const Categories = () => {
   return (
     <section className="bg-white py-16 px-4 md:px-8">
       <div className="max-w-screen-2xl mx-auto">
-        <h2 className="text-4xl font-serif text-black mb-8">
-          Featured Categories
-        </h2>
+        <h2 className="text-4xl font-serif text-black mb-8">Our Property Locations</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categoriesData.map((category) => (
             
@@ -67,11 +65,7 @@ const Categories = () => {
               to={`/listings/${slugify(category.name)}`}
               className="block"
             >
-              <CategoryCard
-                name={category.name}
-                listings={category.listings}
-                imageUrl={``}
-              />
+              <CategoryCard name={category.name} listings={category.listings} imageUrl={category.imageUrl} />
             </Link>
 
           ))}

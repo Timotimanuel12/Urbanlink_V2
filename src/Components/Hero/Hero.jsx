@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // --- SVG ICONS ---
 
@@ -44,15 +44,55 @@ const ArrowRightIcon = (props) => (
 // --- HERO COMPONENT ---
 
 const Hero = () => {
+  const slides = [
+    {
+      image:
+        "url('https://images.unsplash.com/photo-1600585154340-9b04b3a86c34?auto=format&fit=crop&w=1920&q=80')",
+      info: {
+        location: 'House in Bluffton, South Carolina, United States',
+        price: '$9.09M',
+      },
+    },
+    {
+      image:
+        "url('https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1920&q=80')",
+      info: {
+        location: 'Villa in Marbella, Spain',
+        price: '$2.50M',
+      },
+    },
+    {
+      image:
+        "url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1920&q=80')",
+      info: {
+        location: 'Ranch in Dripping Springs, Texas, United States',
+        price: '$28.00M',
+      },
+    },
+    {
+      image:
+        "url('https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1920&q=80')",
+      info: {
+        location: 'Cliffside Villa in Bali, Indonesia',
+        price: '$2.50M',
+      },
+    },
+  ];
+  const [index, setIndex] = useState(0);
+  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+  const next = () => setIndex((i) => (i + 1) % slides.length);
   return (
     <section className="relative h-screen w-full text-white">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/222/EEE?text=Hero')",
-        }}
-      ></div>
+      {/* Background Images (crossfade) */}
+      <div className="absolute inset-0">
+        {slides.map((s, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out ${i === index ? 'opacity-100' : 'opacity-0'}`}
+            style={{ backgroundImage: s.image }}
+          />
+        ))}
+      </div>
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -88,25 +128,29 @@ const Hero = () => {
             <div className="flex items-center gap-4">
               {/* Slider Dots */}
               <div className="flex items-center gap-2">
-                <button className="w-2 h-2 bg-white rounded-full opacity-100"></button>
-                <button className="w-2 h-2 bg-white rounded-full opacity-50 hover:opacity-100 transition-opacity"></button>
-                <button className="w-2 h-2 bg-white rounded-full opacity-50 hover:opacity-100 transition-opacity"></button>
-                <button className="w-2 h-2 bg-white rounded-full opacity-50 hover:opacity-100 transition-opacity"></button>
+                {slides.map((_, i) => (
+                  <button
+                    key={i}
+                    aria-label={`Slide ${i + 1}`}
+                    onClick={() => setIndex(i)}
+                    className={`w-2 h-2 rounded-full transition-opacity ${i === index ? 'bg-white opacity-100' : 'bg-white opacity-50 hover:opacity-100'}`}
+                  />
+                ))}
               </div>
 
               {/* Arrows */}
-              <button className="p-2 opacity-50 hover:opacity-100 transition-opacity">
+              <button onClick={prev} className="p-2 opacity-50 hover:opacity-100 transition-opacity">
                 <ArrowLeftIcon className="w-5 h-5" />
               </button>
-              <button className="p-2 opacity-50 hover:opacity-100 transition-opacity">
+              <button onClick={next} className="p-2 opacity-50 hover:opacity-100 transition-opacity">
                 <ArrowRightIcon className="w-5 h-5" />
               </button>
 
               {/* Property Info */}
-              <div className="hidden md:block text-xs uppercase tracking-widest">
-                <span>House in Bluffton, South Carolina, United States</span>
+              <div className="hidden md:block text-xs uppercase tracking-widest transition-opacity duration-500">
+                <span>{slides[index].info.location}</span>
                 <span className="mx-2 opacity-50">•</span>
-                <span>$9.09M</span>
+                <span>{slides[index].info.price}</span>
               </div>
             </div>
           </div>
