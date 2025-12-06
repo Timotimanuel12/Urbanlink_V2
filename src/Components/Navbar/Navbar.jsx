@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // <--- 1. IMPORT ADDED HERE
+import { Link, useLocation } from 'react-router-dom';
+import AuthModal from '../Auth/AuthModal.jsx';
 
 // Inline SVG Icons for simplicity
 const MenuIcon = (props) => (
@@ -55,18 +56,18 @@ const UserIcon = (props) => (
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const location = useLocation();
+  const isSolid = isScrolled || location.pathname !== '/';
 
   const navLinks = [
-    { name: 'Buy Property', href: '#' },
-    { name: 'New Projects', href: '#' },
-    { name: 'Luxury Houses', href: '#' },
-    { name: 'Commertial', href: '#' },
-    { name: 'Land', href: '#' },
-    { name: 'KPR', href: '#' },
-    { name: 'Neighborhoods', href: '#' },
-    { name: 'Sell', href: '#' },
-    { name: 'Agents', href: '#' },
-    { name: 'Journal', href: '#' },
+    { name: 'Buy Property', href: '/buy' },
+    { name: 'Type', href: '#' },
+    { name: 'Location', href: '#' },
+    { name: 'KPR', href: '/KPR' },
+    { name: 'Sell Your Property', href: '/jualrumah' },
+    { name: 'Join as Agent', href: '#' },
+    { name: 'Contact Us', href: '#' },
   ];
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const Navbar = () => {
         className={`
           fixed top-0 left-0 right-0 z-20 
           transition-all duration-300 ease-in-out 
-          ${isScrolled ? 'bg-white text-black shadow-lg' : 'text-white'}
+          ${isSolid ? 'bg-white text-black shadow-lg' : 'text-white'}
         `}
       >
         {/* Wrapper for padding and max-width */}
@@ -101,14 +102,14 @@ const Navbar = () => {
             className={`
               flex justify-between items-center py-4 
               transition-colors duration-300 ease-in-out 
-              ${isScrolled ? 'border-b border-gray-200' : 'border-b border-white border-opacity-20'}
+              ${isSolid ? 'border-b border-gray-200' : 'border-b border-white border-opacity-20'}
             `}
           >
             {/* Left Section */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className={`transition-colors ${isScrolled ? 'hover:text-gray-700' : 'hover:text-gray-300'}`}
+                className={`transition-colors ${isSolid ? 'hover:text-gray-700' : 'hover:text-gray-300'}`}
                 aria-label="Open menu"
               >
                 <MenuIcon />
@@ -126,7 +127,7 @@ const Navbar = () => {
                   className={`
                     hidden md:block text-[10px] font-medium uppercase tracking-wide 
                     transition-colors border-l pl-3
-                    ${isScrolled 
+                    ${isSolid 
                       ? 'border-gray-300 text-gray-500 hover:text-black' 
                       : 'border-white/30 text-gray-300 hover:text-white'
                     }
@@ -143,7 +144,7 @@ const Navbar = () => {
               <button
                 className={`
                   hidden sm:block text-sm font-medium uppercase tracking-wide 
-                  transition-colors ${isScrolled ? 'hover:text-gray-700' : 'hover:text-gray-300'}
+                  transition-colors ${isSolid ? 'hover:text-gray-700' : 'hover:text-gray-300'}
                 `}
               >
                 Sell With Us
@@ -153,11 +154,12 @@ const Navbar = () => {
                   flex items-center gap-2 text-sm font-medium uppercase tracking-wide 
                   border rounded-full px-4 py-2 transition-all duration-300
                   ${
-                    isScrolled
+                    isSolid
                       ? 'border-black border-opacity-50 hover:bg-black hover:bg-opacity-5'
                       : 'border-white border-opacity-50 hover:bg-white hover:bg-opacity-10'
                   }
                 `}
+                onClick={() => setIsAuthOpen(true)}
               >
                 <UserIcon />
                 <span className="hidden sm:block">Log In</span>
@@ -170,21 +172,53 @@ const Navbar = () => {
             className={`
               hidden lg:flex justify-center items-center py-4 
               transition-colors duration-300 ease-in-out 
-              ${isScrolled ? 'border-b border-gray-200' : 'border-b border-white border-opacity-20'}
+              ${isSolid ? 'border-b border-gray-200' : 'border-b border-white border-opacity-20'}
             `}
           >
             <ul className="flex items-center gap-x-6">
               {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
+                <li key={link.name} className="relative group">
+                  <Link
+                    to={link.href}
                     className={`
-                      text-sm font-medium uppercase tracking-wide 
-                      transition-colors ${isScrolled ? 'hover:text-gray-700' : 'hover:text-gray-300'}
+                      text-sm font-medium uppercase tracking-wide inline-block leading-none
+                      transition-colors ${isSolid ? 'hover:text-gray-700' : 'hover:text-gray-300'}
+                      border-b-2 border-transparent hover:border-current
                     `}
                   >
                     {link.name}
-                  </a>
+                  </Link>
+                  {link.name === 'Type' && (
+                    <div className="absolute left-0 top-full pt-2 hidden group-hover:block">
+                      <div className="min-w-[420px] bg-white text-gray-600 shadow-lg p-6 border border-gray-200 rounded-none z-30">
+                        <div className="grid grid-cols-3 gap-6">
+                          <Link to="/search?type=apartment" className="text-sm font-medium hover:text-black">Apartment</Link>
+                          <Link to="/search?type=rumah" className="text-sm font-medium hover:text-black">Rumah</Link>
+                          <Link to="/search?type=ruko" className="text-sm font-medium hover:text-black">Ruko</Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {link.name === 'Location' && (
+                    <div className="absolute left-0 top-full pt-2 hidden group-hover:block">
+                      <div className="min-w-[260px] bg-white text-gray-600 shadow-lg p-6 border border-gray-200 rounded-none z-30">
+                        <div className="flex flex-col gap-2">
+                          <Link to="/search?location=jakarta-barat" className="text-sm font-medium hover:text-black">Jakarta Barat</Link>
+                          <Link to="/search?location=jakarta-selatan" className="text-sm font-medium hover:text-black">Jakarta Selatan</Link>
+                          <Link to="/search?location=jakarta-utara" className="text-sm font-medium hover:text-black">Jakarta Utara</Link>
+                          <Link to="/search?location=jakarta-pusat" className="text-sm font-medium hover:text-black">Jakarta Pusat</Link>
+                          <Link to="/search?location=jakarta-timur" className="text-sm font-medium hover:text-black">Jakarta Timur</Link>
+                          <Link to="/search?location=kota-tangerang" className="text-sm font-medium hover:text-black">Kota Tangerang</Link>
+                          <Link to="/search?location=kabupaten-tangerang" className="text-sm font-medium hover:text-black">Kabupaten Tangerang</Link>
+                          <Link to="/search?location=tangerang-selatan" className="text-sm font-medium hover:text-black">Tangerang Selatan</Link>
+                          <Link to="/search?location=bekasi" className="text-sm font-medium hover:text-black">Bekasi</Link>
+                          <Link to="/search?location=cibubur" className="text-sm font-medium hover:text-black">Cibubur</Link>
+                          <Link to="/search?location=bogor" className="text-sm font-medium hover:text-black">Bogor</Link>
+                          <Link to="/search?location=depok" className="text-sm font-medium hover:text-black">Depok</Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
@@ -214,12 +248,12 @@ const Navbar = () => {
           <ul className="flex flex-col gap-y-6 flex-1">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="text-xl font-medium uppercase tracking-wide hover:text-gray-300 transition-colors"
+                <Link
+                  to={link.href}
+                  className="text-xl font-medium uppercase tracking-wide hover:text-gray-300 transition-colors inline-block leading-none border-b-2 border-transparent hover:border-white"
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -231,6 +265,9 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+      )}
+      {isAuthOpen && (
+        <AuthModal open={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
       )}
     </>
   );

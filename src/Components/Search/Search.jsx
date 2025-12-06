@@ -1,5 +1,6 @@
 import React,
 { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // --- Icons ---
 const SearchIcon = ({ className = "w-5 h-5" }) => (
@@ -95,6 +96,8 @@ const CategoryDropdown = () => {
 
 // --- Main Search Component ---
 const Search = () => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
   return (
     <div className="relative w-full max-w-md"> {/* Made it smaller */}
       {/* Font import */}
@@ -103,17 +106,18 @@ const Search = () => {
       `}</style>
       
       <form
-        className="flex w-full items-center shadow-lg rounded-full" // Fully rounded, larger shadow
-        onSubmit={(e) => e.preventDefault()}
-        style={{ fontFamily: "'Nunito', sans-serif" }} // Apply font
+        className="flex w-full items-center shadow-lg rounded-full"
+        onSubmit={(e) => { e.preventDefault(); navigate(`/search?q=${encodeURIComponent(query)}`); }}
+        style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         {/* Search Input */}
         <div className="flex-grow">
           <input
             type="text"
             placeholder="Lokasi, Area, Jenis Properti"
-            // Light and bright gray placeholder
             className="h-10 w-full rounded-l-full border border-gray-300 border-r-0 px-5 py-2 text-sm placeholder-gray-400 focus:outline-none"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </div>
 

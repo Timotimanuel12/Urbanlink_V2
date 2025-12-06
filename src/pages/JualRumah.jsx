@@ -48,7 +48,10 @@ const SellPropertyForm = () => {
   const [ownershipStatus, setOwnershipStatus] = useState('pribadi');
   const [formData, setFormData] = useState({ /* ... form state ... */ });
 
-  const handleChange = (e) => { /* ... handle change ... */ };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Submitted:', { ...formData, ownershipStatus });
@@ -65,7 +68,7 @@ const SellPropertyForm = () => {
         `}
       </style>
       <div 
-        className="bg-gray-50 min-h-screen p-4 md:p-8 pt-24 md:pt-32"
+        className="bg-gray-50 min-h-screen p-4 md:p-8 pt-28"
         style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         <div className="max-w-6xl mx-auto">
@@ -320,7 +323,7 @@ const SellPropertyForm = () => {
 
             {/* --- Right Sidebar --- */}
             <div className="w-full md:w-1/4">
-              <div className="bg-blue-600 text-white p-6 rounded-xl shadow-lg text-center sticky top-24"> {/* Made sidebar sticky */}
+              <div className="bg-blue-600 text-white p-6 rounded-xl shadow-lg text-center sticky top-[112px]">
                 <p className="text-lg font-semibold mb-4">
                   Butuh bantuan seputar titip atau cari properti?
                 </p>

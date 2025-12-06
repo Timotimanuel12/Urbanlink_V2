@@ -47,11 +47,11 @@ const calculatePMT = (principal, monthlyRate, numMonths) => {
 
 const KprCalculator = () => {
   // --- State Variables ---
-  const [propertyPrice, setPropertyPrice] = useState('100.000.000');
-  const [dpAmount, setDpAmount] = useState('20.000.000');
+  const [propertyPrice, setPropertyPrice] = useState('5.000.000.000');
+  const [dpAmount, setDpAmount] = useState('1.000.000.000');
   const [dpPercent, setDpPercent] = useState('20');
-  const [loanTerm, setLoanTerm] = useState('10'); // In years
-  const [interestRate, setInterestRate] = useState('6'); // Annual percentage
+  const [loanTerm, setLoanTerm] = useState('15');
+  const [interestRate, setInterestRate] = useState('8.5');
   
   const [loanAmount, setLoanAmount] = useState(80000000);
   const [installments, setInstallments] = useState([]);
@@ -108,7 +108,7 @@ const KprCalculator = () => {
   // --- Main Calculation Function ---
 
   const handleCalculate = () => {
-    const termsInYears = [5, 10, 15, 20, 25, 30];
+    const termsInYears = [5, 10, 15, 20, 25];
     const principal = loanAmount;
     const annualRate = parseFloat(interestRate) || 0;
     const monthlyRate = annualRate / 100 / 12;
@@ -132,7 +132,7 @@ const KprCalculator = () => {
 
   // --- New component for the description text ---
   const KprDescription = () => (
-    <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden mt-8">
+    <div className="max-w-5xl mx-auto mt-12">
       <div className="p-6 md:p-8 text-gray-700 leading-relaxed">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">
           Kalkulator KPR: Simulasi Kredit Pemilikan Rumah
@@ -239,159 +239,91 @@ const KprCalculator = () => {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4 md:p-8 font-sans">
-      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+    <div className="bg-gray-50 min-h-screen p-4 md:p-8 pt-32 lg:pt-40 font-sans">
+      <div className="max-w-6xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden">
         <div className="flex flex-col md:flex-row">
           
           {/* --- Left Side: Inputs --- */}
           <div className="w-full md:w-3/5 p-6 md:p-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">
+            <h1 className="text-4xl font-serif font-bold text-black mb-2">
               Kalkulator KPR
             </h1>
+            <p className="text-sm text-gray-500 mb-6">Estimasi cicilan rumah impian Anda dengan mudah.</p>
             
             <form onSubmit={(e) => { e.preventDefault(); handleCalculate(); }}>
               {/* Harga Properti */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600 mb-1">
-                  Harga Properti
-                </label>
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">Harga Properti</label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                    Rp.
-                  </span>
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    value={propertyPrice}
-                    onChange={handlePropertyPriceChange}
-                    className="w-full pl-10 pr-4 py-2 border rounded-md text-gray-700 text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  />
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">Rp</span>
+                  <input type="text" inputMode="numeric" value={propertyPrice} onChange={handlePropertyPriceChange} className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-800 text-right focus:ring-2 focus:ring-black focus:outline-none" />
                 </div>
               </div>
 
               {/* Down Payment (DP) */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600 mb-1">
-                  Down Payment (DP)
-                </label>
-                <div className="flex space-x-2">
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">Uang Muka (DP)</label>
+                <div className="flex gap-3">
                   <div className="relative w-3/5">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                      Rp.
-                    </span>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={dpAmount}
-                      onChange={handleDpAmountChange}
-                      className="w-full pl-10 pr-4 py-2 border rounded-md text-gray-700 text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">Rp</span>
+                    <input type="text" inputMode="numeric" value={dpAmount} onChange={handleDpAmountChange} className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-800 text-right focus:ring-2 focus:ring-black focus:outline-none" />
                   </div>
                   <div className="relative w-2/5">
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={dpPercent}
-                      onChange={handleDpPercentChange}
-                      className="w-full pl-4 pr-8 py-2 border rounded-md text-gray-700 text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
-                      %
-                    </span>
+                    <input type="text" inputMode="numeric" value={dpPercent} onChange={handleDpPercentChange} className="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg text-gray-800 text-right focus:ring-2 focus:ring-black focus:outline-none" />
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">%</span>
                   </div>
                 </div>
               </div>
 
               {/* Jumlah Kredit */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600 mb-1">
-                  Jumlah Kredit
-                </label>
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">Pokok Pinjaman</label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                    Rp.
-                  </span>
-                  <input
-                    type="text"
-                    value={formatCurrency(loanAmount)}
-                    readOnly
-                    className="w-full pl-10 pr-4 py-2 border rounded-md text-gray-700 text-right bg-gray-100"
-                  />
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">Rp</span>
+                  <input type="text" value={formatCurrency(loanAmount)} readOnly className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-800 text-right bg-gray-100" />
                 </div>
               </div>
 
               {/* Jangka Waktu & Bunga */}
-              <div className="flex space-x-2 mb-6">
+              <div className="flex gap-3 mb-6">
                 <div className="w-1/2">
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Jangka Waktu
-                  </label>
+                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">Jangka Waktu</label>
                   <div className="relative">
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={loanTerm}
-                      onChange={(e) => setLoanTerm(e.target.value.replace(/\D/g, ''))}
-                      className="w-full pl-4 pr-14 py-2 border rounded-md text-gray-700 text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
-                      tahun
-                    </span>
+                    <input type="text" inputMode="numeric" value={loanTerm} onChange={(e) => setLoanTerm(e.target.value.replace(/\D/g, ''))} className="w-full pl-4 pr-14 py-3 border border-gray-300 rounded-lg text-gray-800 text-right focus:ring-2 focus:ring-black focus:outline-none" />
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">Tahun</span>
                   </div>
                 </div>
                 <div className="w-1/2">
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
-                    Bunga
-                  </label>
+                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">Bunga (Tahunan)</label>
                   <div className="relative">
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={interestRate}
-                      onChange={(e) => setInterestRate(e.target.value)}
-                      className="w-full pl-4 pr-8 py-2 border rounded-md text-gray-700 text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
-                      %
-                    </span>
+                    <input type="text" inputMode="numeric" value={interestRate} onChange={(e) => setInterestRate(e.target.value)} className="w-full pl-4 pr-8 py-3 border border-gray-300 rounded-lg text-gray-800 text-right focus:ring-2 focus:ring-black focus:outline-none" />
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">%</span>
                   </div>
                 </div>
               </div>
 
               {/* Tombol Hitung */}
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
-              >
-                Hitung Angsuran
-              </button>
+              <button type="submit" className="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-black/90 transition">Hitung Angsuran</button>
             </form>
           </div>
           
-          {/* --- Right Side: Outputs --- */}
-          <div className="w-full md:w-2/5 bg-gray-50 p-6 md:p-8">
-            <h2 className="text-xl font-bold text-gray-800 mb-5">
-              Angsuran KPR
-            </h2>
-            <div className="space-y-2">
+          <div className="w-full md:w-2/5 bg-gray-900 text-white p-6 md:p-8 relative">
+            <h2 className="text-2xl font-serif font-bold mb-5">Estimasi Angsuran</h2>
+            <div className="space-y-3">
               {installments.length > 0 ? (
                 installments.map((item) => (
                   <div
                     key={item.term}
-                    className={`flex justify-between items-center p-3 rounded-lg ${
-                      item.term == loanTerm ? 'bg-blue-100 border border-blue-300' : 'bg-white'
-                    }`}
+                    className={`${item.term == loanTerm ? 'bg-white text-black' : 'bg-transparent text-white'} rounded-xl border ${item.term == loanTerm ? 'border-white' : 'border-white/20'} p-4 flex justify-between items-center`}
                   >
-                    <span className={`font-medium ${
-                      item.term == loanTerm ? 'text-blue-700' : 'text-gray-600'
-                    }`}>
-                      {item.term} tahun
-                    </span>
-                    <span className={`font-bold ${
-                      item.term == loanTerm ? 'text-blue-700' : 'text-gray-800'
-                    }`}>
-                      Rp. {formatCurrency(item.amount)}/bln
-                    </span>
+                    <div>
+                      <div className="text-xs uppercase tracking-wide opacity-70">Tenor</div>
+                      <div className="text-lg font-bold">{item.term} Tahun</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs uppercase tracking-wide opacity-70">Cicilan per bulan</div>
+                      <div className="text-lg font-bold">Rp {formatCurrency(item.amount)}</div>
+                    </div>
                   </div>
                 ))
               ) : (
@@ -400,10 +332,7 @@ const KprCalculator = () => {
                 </p>
               )}
             </div>
-            
-            <p className="text-xs text-gray-500 mt-6"><i>
-              *Hasil dari perhitungan simulasi KPR ini hanya merupakan perkiraan saja. Untuk perhitungan tepatnya, pihak bank akan memberikan ilustrasi angsuran Anda.
-            </i></p>
+            <p className="text-xs text-white/60 mt-6">*Perhitungan ini adalah simulasi estimasi. Suku bunga dan biaya lain dapat berubah sesuai kebijakan bank terkait.</p>
           </div>
         </div>
       </div>

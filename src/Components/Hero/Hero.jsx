@@ -1,4 +1,4 @@
-import React from 'react'; // Removed useState and useEffect as they were only used by Navbar
+import React from 'react';
 
 // --- SVG ICONS ---
 
@@ -40,9 +40,6 @@ const ArrowRightIcon = (props) => (
     />
   </svg>
 );
-
-// --- NAVBAR COMPONENT ---
-// The entire Navbar component has been removed as requested.
 
 // --- HERO COMPONENT ---
 
@@ -121,20 +118,4 @@ const Hero = () => {
   );
 };
 
-// --- APP COMPONENT ---
-
-const App = () => {
-  return (
-    // We use 'Inter' as a modern sans-serif font, similar to the example
-    <div className="font-['Inter']">
-      {/* <Navbar /> has been removed from here */}
-      <Hero />
-      
-      {/* Removed the placeholder content div as its purpose was 
-        to test the removed navbar's scroll effect.
-      */}
-    </div>
-  );
-};
-
-export default App;
+export default Hero;

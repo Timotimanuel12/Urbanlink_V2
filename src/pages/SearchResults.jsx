@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HeartIcon, 
@@ -9,7 +9,7 @@ import {
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 
 // --- MOCK DATA ---
-const searchResults = [
+const baseResults = [
   {
     id: 1,
     price: '$36,000,000',
@@ -61,6 +61,14 @@ const searchResults = [
     tags: ['New price', '1/28']
   },
 ];
+
+const makeResults = (count = 24) => {
+  const arr = Array.from({ length: count }, (_, i) => {
+    const src = baseResults[i % baseResults.length];
+    return { ...src, id: i + 1 };
+  });
+  return arr;
+};
 
 // --- SUB-COMPONENTS ---
 
@@ -125,12 +133,23 @@ const SearchCard = ({ item }) => (
 
 const SearchResults = () => {
   const [showMap, setShowMap] = useState(true);
+  const [page, setPage] = useState(1);
+  const [visibleCount, setVisibleCount] = useState(8);
+  const perPage = 16;
+
+  const allResults = useMemo(() => makeResults(48), []);
+  const totalPages = Math.max(1, Math.ceil(allResults.length / perPage));
+  const paginated = useMemo(() => {
+    const start = (page - 1) * perPage;
+    return allResults.slice(start, start + perPage);
+  }, [allResults, page]);
+  const shownItems = useMemo(() => paginated.slice(0, visibleCount), [paginated, visibleCount]);
 
   return (
-    <div className="pt-20 min-h-screen bg-white">
+    <div className="pt-28 min-h-screen bg-white">
       
       {/* 1. SEARCH HEADER & FILTERS */}
-      <div className="sticky top-16 z-30 bg-white border-b border-gray-200 shadow-sm">
+      <div className="sticky top-[112px] z-30 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-screen-2xl mx-auto px-4 py-4">
           
           {/* Top Row: Breadcrumbs & Title */}
@@ -174,7 +193,7 @@ const SearchResults = () => {
           {/* Left Side: Listings Grid */}
           <div className={`${showMap ? 'w-full lg:w-3/5' : 'w-full'} px-4 py-6 transition-all duration-300`}>
             <div className="flex justify-between items-center mb-6">
-              <p className="text-sm text-gray-500">47 listings</p>
+              <p className="text-sm text-gray-500">{allResults.length} listings</p>
               <div className="text-sm text-gray-900 flex items-center gap-1 cursor-pointer">
                 Sort: Premium <span className="text-xs">▼</span>
               </div>
@@ -182,23 +201,55 @@ const SearchResults = () => {
 
             {/* The Grid */}
             <div className={`grid gap-8 ${showMap ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'}`}>
-              {searchResults.map((item) => (
+              {shownItems.map((item) => (
                 <SearchCard key={item.id} item={item} />
               ))}
             </div>
             
-            {/* Pagination Placeholder */}
-            <div className="mt-12 flex justify-center gap-2">
-               <button className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-gray-50">1</button>
-               <button className="w-10 h-10 border rounded-full flex items-center justify-center bg-black text-white">2</button>
-               <button className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-gray-50">3</button>
-               <button className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-gray-50">❯</button>
-            </div>
+            {visibleCount < 16 ? (
+              <div className="mt-12 flex justify-center">
+                <button
+                  onClick={() => setVisibleCount(16)}
+                  className="px-6 py-3 border rounded-full text-sm font-semibold hover:bg-gray-50"
+                >
+                  View more
+                </button>
+              </div>
+            ) : (
+              <div className="mt-12 flex flex-col items-center gap-4">
+                <div className="text-sm text-gray-600">Page {page} of {totalPages}</div>
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => { setPage((p) => Math.max(1, p - 1)); setVisibleCount(8); }}
+                    className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-gray-50"
+                  >
+                    ‹
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                    <button
+                      key={n}
+                      onClick={() => { setPage(n); setVisibleCount(8); }}
+                      className={`w-10 h-10 border rounded-full flex items-center justify-center ${
+                        n === page ? 'bg-black text-white' : 'hover:bg-gray-50'
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); setVisibleCount(8); }}
+                    className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-gray-50"
+                  >
+                    ❯
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right Side: Map (Sticky) */}
           {showMap && (
-            <div className="hidden lg:block w-2/5 bg-gray-100 sticky top-[145px] h-[calc(100vh-145px)] border-l border-gray-200">
+            <div className="hidden lg:block w-2/5 bg-gray-100 sticky top-[112px] h-[calc(100vh-112px)] border-l border-gray-200">
               {/* Placeholder Map Image - Replace with Google Maps later */}
               <div className="relative w-full h-full">
                  <img 
@@ -227,6 +278,7 @@ const SearchResults = () => {
           )}
         </div>
       </div>
+      
     </div>
   );
 };
