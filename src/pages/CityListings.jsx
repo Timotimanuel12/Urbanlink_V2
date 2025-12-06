@@ -28,6 +28,7 @@ const cityDatabase = {
   'jakarta-utara': {
     title: "Homes in Jakarta Utara",
     description: "Waterfront and modern properties in North Jakarta.",
+    hero: "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1920&q=80",
   },
   'jakarta-pusat': {
     title: "Homes in Jakarta Pusat",
@@ -180,7 +181,7 @@ const CityListings = () => {
           1. HERO SECTION + SEARCH BAR
       ========================================= */}
       <div className="relative h-[550px] w-full">
-        <img src="https://placehold.co/1920x800/222/EEE?text=City+Hero" alt={data.title} className="absolute inset-0 w-full h-full object-cover"/>
+        <img src={data.hero || "https://placehold.co/1920x800/222/EEE?text=City+Hero"} alt={data.title} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-8 shadow-sm drop-shadow-md">{data.title}</h1>
