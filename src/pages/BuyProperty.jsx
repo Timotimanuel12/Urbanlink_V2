@@ -4,8 +4,10 @@ import { HeartIcon, AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from '@hero
 
 //
 
+import { Link } from 'react-router-dom';
+
 const SearchCard = ({ item }) => (
-  <div className="flex flex-col group cursor-pointer">
+  <Link to={`/property/${item.id}`} className="flex flex-col group cursor-pointer">
     <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
       <img src="https://placehold.co/800x600/EEE/333?text=Property" alt={item.address} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
       <div className="absolute top-3 left-3 flex gap-2">
@@ -32,7 +34,7 @@ const SearchCard = ({ item }) => (
         )}
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 const baseResults = [

@@ -13,27 +13,21 @@ import {
 //=================================================================
 // 1. FEATURED CATEGORIES COMPONENT CODE
 //=================================================================
+const slugify = (s) => s.toLowerCase().replace(/\s+/g, '-');
+
 const categoriesData = [
-  {
-    name: 'Jakarta',
-    listings: '602,225 LISTINGS',
-    imageUrl: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
-  },
-  {
-    name: 'Tanggerang',
-    listings: '10,008 LISTINGS',
-    imageUrl: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
-  },
-  {
-    name: 'Bogor',
-    listings: '904 LISTINGS',
-    imageUrl: 'https://images.unsplash.com/photo-1563802330831-a89c3660a9f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1740&q=80',
-  },
-  {
-    name: 'Bali',
-    listings: '33 LISTINGS',
-    imageUrl: 'https://images.unsplash.com/photo-1559030623-0234b1d0db16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%D&auto=format&fit=crop&w=1824&q=80',
-  },
+  { name: 'Jakarta Barat', listings: '12,341 LISTINGS' },
+  { name: 'Jakarta Selatan', listings: '24,508 LISTINGS' },
+  { name: 'Jakarta Utara', listings: '10,112 LISTINGS' },
+  { name: 'Jakarta Pusat', listings: '8,932 LISTINGS' },
+  { name: 'Jakarta Timur', listings: '9,751 LISTINGS' },
+  { name: 'Kota Tangerang', listings: '7,004 LISTINGS' },
+  { name: 'Kabupaten Tangerang', listings: '5,890 LISTINGS' },
+  { name: 'Tangerang Selatan', listings: '11,205 LISTINGS' },
+  { name: 'Bekasi', listings: '13,402 LISTINGS' },
+  { name: 'Cibubur', listings: '4,231 LISTINGS' },
+  { name: 'Bogor', listings: '904 LISTINGS' },
+  { name: 'Depok', listings: '6,084 LISTINGS' },
 ];
 
 const CategoryCard = ({ name, listings, imageUrl }) => (
@@ -70,13 +64,13 @@ const Categories = () => {
             // When name is "Jakarta", the link becomes "/listings/jakarta"
             <Link 
               key={category.name} 
-              to={`/listings/${category.name.toLowerCase()}`}
+              to={`/listings/${slugify(category.name)}`}
               className="block"
             >
               <CategoryCard
                 name={category.name}
                 listings={category.listings}
-                imageUrl={category.imageUrl}
+                imageUrl={``}
               />
             </Link>
 
@@ -131,8 +125,9 @@ const trendingListings = [
 ];
 
 // Individual listing card
+
 const ListingCard = ({ listing }) => (
-  <div className="flex-shrink-0 w-80 sm:w-96 snap-start">
+  <Link to={`/property/${listing.id}`} className="flex-shrink-0 w-80 sm:w-96 snap-start">
     <div className="relative group bg-white rounded-lg overflow-hidden shadow-sm">
       <div className="relative h-64 w-full">
         <img
@@ -163,7 +158,7 @@ const ListingCard = ({ listing }) => (
         <p className="text-sm text-gray-600 truncate">{listing.description}</p>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 // / Main Trending component

@@ -195,18 +195,18 @@ const Navbar = () => {
                     <div className="absolute left-0 top-full pt-2 hidden group-hover:block">
                       <div className="min-w-[260px] bg-white text-gray-600 shadow-lg p-6 border border-gray-200 rounded-none z-30">
                         <div className="flex flex-col gap-2">
-                          <Link to="/search?location=jakarta-barat" className="text-sm font-medium hover:text-black">Jakarta Barat</Link>
-                          <Link to="/search?location=jakarta-selatan" className="text-sm font-medium hover:text-black">Jakarta Selatan</Link>
-                          <Link to="/search?location=jakarta-utara" className="text-sm font-medium hover:text-black">Jakarta Utara</Link>
-                          <Link to="/search?location=jakarta-pusat" className="text-sm font-medium hover:text-black">Jakarta Pusat</Link>
-                          <Link to="/search?location=jakarta-timur" className="text-sm font-medium hover:text-black">Jakarta Timur</Link>
-                          <Link to="/search?location=kota-tangerang" className="text-sm font-medium hover:text-black">Kota Tangerang</Link>
-                          <Link to="/search?location=kabupaten-tangerang" className="text-sm font-medium hover:text-black">Kabupaten Tangerang</Link>
-                          <Link to="/search?location=tangerang-selatan" className="text-sm font-medium hover:text-black">Tangerang Selatan</Link>
-                          <Link to="/search?location=bekasi" className="text-sm font-medium hover:text-black">Bekasi</Link>
-                          <Link to="/search?location=cibubur" className="text-sm font-medium hover:text-black">Cibubur</Link>
-                          <Link to="/search?location=bogor" className="text-sm font-medium hover:text-black">Bogor</Link>
-                          <Link to="/search?location=depok" className="text-sm font-medium hover:text-black">Depok</Link>
+                          <Link to="/listings/jakarta-barat" className="text-sm font-medium hover:text-black">Jakarta Barat</Link>
+                          <Link to="/listings/jakarta-selatan" className="text-sm font-medium hover:text-black">Jakarta Selatan</Link>
+                          <Link to="/listings/jakarta-utara" className="text-sm font-medium hover:text-black">Jakarta Utara</Link>
+                          <Link to="/listings/jakarta-pusat" className="text-sm font-medium hover:text-black">Jakarta Pusat</Link>
+                          <Link to="/listings/jakarta-timur" className="text-sm font-medium hover:text-black">Jakarta Timur</Link>
+                          <Link to="/listings/kota-tangerang" className="text-sm font-medium hover:text-black">Kota Tangerang</Link>
+                          <Link to="/listings/kabupaten-tangerang" className="text-sm font-medium hover:text-black">Kabupaten Tangerang</Link>
+                          <Link to="/listings/tangerang-selatan" className="text-sm font-medium hover:text-black">Tangerang Selatan</Link>
+                          <Link to="/listings/bekasi" className="text-sm font-medium hover:text-black">Bekasi</Link>
+                          <Link to="/listings/cibubur" className="text-sm font-medium hover:text-black">Cibubur</Link>
+                          <Link to="/listings/bogor" className="text-sm font-medium hover:text-black">Bogor</Link>
+                          <Link to="/listings/depok" className="text-sm font-medium hover:text-black">Depok</Link>
                         </div>
                       </div>
                     </div>

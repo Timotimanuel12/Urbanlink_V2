@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   HeartIcon, 
@@ -13,20 +13,57 @@ import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 // 1. DATA: CITY HERO INFO
 // ==========================================
 const cityDatabase = {
-  jakarta: {
+  'jakarta': {
     title: "Luxury Real Estate in Jakarta",
     description: "Discover the finest mansions and penthouses in Indonesia's capital.",
-    heroImage: "https://images.unsplash.com/photo-1555242083-39b33730316d?auto=format&fit=crop&w=1920&q=80", 
   },
-  tanggerang: {
+  'jakarta-barat': {
+    title: "Homes in Jakarta Barat",
+    description: "Explore premium residences across West Jakarta.",
+  },
+  'jakarta-selatan': {
+    title: "Homes in Jakarta Selatan",
+    description: "Discover luxury living in South Jakarta.",
+  },
+  'jakarta-utara': {
+    title: "Homes in Jakarta Utara",
+    description: "Waterfront and modern properties in North Jakarta.",
+  },
+  'jakarta-pusat': {
+    title: "Homes in Jakarta Pusat",
+    description: "Urban residences at the heart of Jakarta.",
+  },
+  'jakarta-timur': {
+    title: "Homes in Jakarta Timur",
+    description: "Comfortable family homes in East Jakarta.",
+  },
+  'kota-tangerang': {
     title: "Modern Living in Tanggerang",
     description: "Explore spacious family estates in BSD City and Alam Sutera.",
-    heroImage: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1920&q=80",
   },
-  bogor: {
+  'kabupaten-tangerang': {
+    title: "Homes in Kabupaten Tangerang",
+    description: "Growing suburban communities and estates.",
+  },
+  'tangerang-selatan': {
+    title: "Homes in Tangerang Selatan",
+    description: "BSD and premium neighbourhoods in South Tangerang.",
+  },
+  'bekasi': {
+    title: "Homes in Bekasi",
+    description: "Expansive housing and modern developments.",
+  },
+  'cibubur': {
+    title: "Homes in Cibubur",
+    description: "Green living and gated communities.",
+  },
+  'bogor': {
     title: "Serene Retreats in Bogor",
     description: "Find your escape in the cool hills of Sentul and Puncak.",
-    heroImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1920&q=80",
+  },
+  'depok': {
+    title: "Homes in Depok",
+    description: "Convenient city living with quick access to Jakarta.",
   }
 };
 
@@ -65,8 +102,9 @@ const newToMarketHomes = [
 // ==========================================
 // 5. COMPONENT: LISTING CARD (UPDATED WITH TAGS)
 // ==========================================
+
 const ListingCard = ({ item }) => (
-  <div className="group cursor-pointer flex-shrink-0 w-full sm:w-72 md:w-80 snap-start">
+  <Link to={`/property/${item.id}`} className="group cursor-pointer flex-shrink-0 w-full sm:w-72 md:w-80 snap-start">
     <div className="relative h-64 w-full overflow-hidden rounded-lg mb-4">
       <img 
         src="https://placehold.co/600x400/EEE/333?text=House" 
@@ -104,7 +142,7 @@ const ListingCard = ({ item }) => (
       <p className="text-sm text-gray-500 truncate">{item.location}</p>
       <p className="text-sm text-black truncate font-medium mt-1">{item.title}</p>
     </div>
-  </div>
+  </Link>
 );
 
 // ==========================================
@@ -115,9 +153,14 @@ const CityListings = () => {
   const { cityName } = useParams();
   const trendingRef = useRef(null);
   const newToMarketRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
   
-  const cityKey = cityName ? cityName.toLowerCase() : 'jakarta';
+  const cityKey = cityName ? cityName.toLowerCase().replace(/\s+/g, '-') : 'jakarta';
   const data = cityDatabase[cityKey] || cityDatabase.jakarta;
+
+  useEffect(() => {
+    setSearchQuery((cityName || '').replace(/-/g, ' '));
+  }, [cityName]);
 
   // Generic Scroll Handler
   const scroll = (ref, direction) => {
@@ -144,7 +187,13 @@ const CityListings = () => {
           <div className="bg-white rounded-lg p-2 flex flex-col md:flex-row items-center gap-2 w-full max-w-4xl shadow-2xl">
             <div className="flex-1 w-full md:w-auto border-b md:border-b-0 md:border-r border-gray-200 px-4 py-2 text-left">
               <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Location</label>
-              <input type="text" placeholder={cityName || "City, Region"} className="w-full outline-none text-gray-900 placeholder-gray-800 font-medium"/>
+              <input
+                type="text"
+                placeholder={cityName || "City, Region"}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full outline-none text-gray-900 placeholder-gray-800 font-medium"
+              />
             </div>
             <div className="w-full md:w-48 border-b md:border-b-0 md:border-r border-gray-200 px-4 py-2 text-left">
               <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Price</label>
@@ -155,7 +204,7 @@ const CityListings = () => {
               <div className="flex items-center justify-between cursor-pointer text-gray-900 font-medium"><span>Any Beds</span><span className="text-xs">▼</span></div>
             </div>
             <button
-             onClick={() => navigate(`/buy?query=${encodeURIComponent(cityName || '')}`)} 
+             onClick={() => navigate(`/buy?query=${encodeURIComponent(searchQuery || '')}`)} 
              className="w-full md:w-auto bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-md font-bold text-sm transition uppercase tracking-wide">Search</button>
           </div>
         </div>
