@@ -68,13 +68,13 @@ const SellPropertyForm = () => {
         `}
       </style>
       <div 
-        className="bg-gray-50 min-h-screen p-4 md:p-8 pt-28"
+        className="bg-gray-50 min-h-screen p-4 md:p-8 pt-[112px] lg:pt-[160px]"
         style={{ fontFamily: "'Nunito', sans-serif" }}
       >
         <div className="max-w-6xl mx-auto">
           
           {/* --- 3 Langkah Praktis Section --- */}
-          <div className="mb-12 text-center">
+          <div className="mb-6 text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">
               3 Langkah Praktis Titip/Cari Properti di Urbalink
             </h2>
@@ -97,14 +97,13 @@ const SellPropertyForm = () => {
             </div>
           </div>
 
-          {/* --- Form and Sidebar Layout --- */}
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* --- Main Form Area --- */}
-            <div className="w-full md:w-3/4 bg-white shadow-lg rounded-xl p-6 md:p-8 border border-gray-200">
-              <h1 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">
+          <div className="h-px bg-gray-200 mb-8" />
+          <div className="flex flex-col md:flex-row gap-12">
+            <div className="w-full md:w-3/4">
+              <h1 className="text-2xl font-bold text-gray-800 mb-4">
                 Titip Jual Properti
               </h1>
-              
+              <div className="h-px bg-gray-200 mb-6" />
               <form onSubmit={handleSubmit}>
                 {/* Data Diri Section */}
                 <h2 className="text-lg font-semibold text-gray-700 mb-3">Data Diri</h2>
@@ -302,10 +301,9 @@ const SellPropertyForm = () => {
                   />
                 </div>
 
-                {/* Note Section */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-md border-l-4 border-gray-200 text-sm text-gray-600">
-                  <p className="font-semibold mb-2 text-gray-800">Note:</p>
-                  <ul className="list-disc list-inside space-y-1">
+                <div className="mt-8 pt-6 border-t text-sm text-gray-600">
+                  <p className="font-semibold mb-2 text-gray-800">Note</p>
+                  <ul className="list-disc list-inside space-y-2">
                     <li>Anda adalah Pemilik langsung Properti yang akan dititipkan di Urbanlink dan dengan ini menjamin bahwa Anda adalah pemilik yang sah atas Properti tersebut, atau/dan memang pihak yang berwenang atas Properti tersebut. Anda menjamin akan menyediakan dokumen, tidak ada pihak lain yang berkepentingan atas kepemilikan dan/atau penjualan/ sewa Properti tersebut kecuali dari Urbanlink, dan tidak bersengketa dalam serta perbaikan apapun.</li>
                     <li>Anda menjamin kebenaran informasi yang diberikan sehubungan dengan Properti tersebut dan Urbanlink tidak bertanggung jawab atas kerugian yang ditimbulkan akibat informasi maupun dokumen yang diakibatkan oleh informasi yang tidak benar, tidak tepat, atau yang tidak diberikan oleh Anda.</li>
                   </ul>
@@ -321,13 +319,11 @@ const SellPropertyForm = () => {
               </form>
             </div>
 
-            {/* --- Right Sidebar --- */}
             <div className="w-full md:w-1/4">
-              <div className="bg-blue-600 text-white p-6 rounded-xl shadow-lg text-center sticky top-[112px]">
-                <p className="text-lg font-semibold mb-4">
-                  Butuh bantuan seputar titip atau cari properti?
-                </p>
-                <button className="bg-white text-blue-600 font-semibold py-2 px-4 rounded-lg hover:bg-blue-100 transition duration-200">
+              <div className="sticky top-[112px] lg:top-[160px]">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Customer Support</h3>
+                <p className="text-sm text-gray-600 mb-4">Butuh bantuan seputar titip atau cari properti?</p>
+                <button className="px-4 py-2 rounded-full border border-black text-sm font-semibold hover:bg-black hover:text-white">
                   Hubungi Customer Support
                 </button>
               </div>

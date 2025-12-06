@@ -50,10 +50,8 @@ const Hero = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1600585154340-9b04b3a86c34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')",
+          backgroundImage: "url('https://placehold.co/1920x1080/222/EEE?text=Hero')",
         }}
-        // Using a high-quality Unsplash image as a default
       ></div>
 
       {/* Dark Overlay */}

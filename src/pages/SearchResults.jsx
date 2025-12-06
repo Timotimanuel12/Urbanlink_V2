@@ -83,7 +83,7 @@ const SearchCard = ({ item }) => (
     {/* Image Section */}
     <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
       <img 
-        src={item.image} 
+        src="https://placehold.co/800x600/EEE/333?text=Property" 
         alt={item.address} 
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
@@ -121,7 +121,7 @@ const SearchCard = ({ item }) => (
         {item.agentImage && (
           <div className="flex items-center gap-2">
              <span className="text-xs text-gray-400">{item.agentName}</span>
-             <img src={item.agentImage} alt={item.agentName} className="w-6 h-6 rounded-full object-cover grayscale" />
+             <img src="https://placehold.co/24x24/EEE/333?text=U" alt={item.agentName} className="w-6 h-6 rounded-full object-cover grayscale" />
           </div>
         )}
       </div>
@@ -253,10 +253,9 @@ const SearchResults = () => {
               {/* Placeholder Map Image - Replace with Google Maps later */}
               <div className="relative w-full h-full">
                  <img 
-                  src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/106.8456, -6.2088, 12, 0, 0/800x1200?access_token=placeholder" 
+                  src="https://placehold.co/800x1200/E5E7EB/9CA3AF?text=Map+View" 
                   alt="Map View" 
                   className="w-full h-full object-cover opacity-80 grayscale"
-                  onError={(e) => { e.target.src = "https://placehold.co/800x1200/E5E7EB/9CA3AF?text=Map+View"; }}
                  />
                  {/* Fake Map Pins */}
                  <div className="absolute top-1/4 left-1/4 bg-black text-white text-xs font-bold px-2 py-1 rounded shadow-lg transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 cursor-pointer">

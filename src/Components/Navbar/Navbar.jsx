@@ -66,8 +66,8 @@ const Navbar = () => {
     { name: 'Location', href: '#' },
     { name: 'KPR', href: '/KPR' },
     { name: 'Sell Your Property', href: '/jualrumah' },
-    { name: 'Join as Agent', href: '#' },
-    { name: 'Contact Us', href: '#' },
+    { name: 'Join as Agent', href: '/join-agent' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   useEffect(() => {
@@ -141,14 +141,6 @@ const Navbar = () => {
 
             {/* Right Section */}
             <div className="flex items-center gap-4">
-              <button
-                className={`
-                  hidden sm:block text-sm font-medium uppercase tracking-wide 
-                  transition-colors ${isSolid ? 'hover:text-gray-700' : 'hover:text-gray-300'}
-                `}
-              >
-                Sell With Us
-              </button>
               <button
                 className={`
                   flex items-center gap-2 text-sm font-medium uppercase tracking-wide 

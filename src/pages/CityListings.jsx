@@ -69,10 +69,9 @@ const ListingCard = ({ item }) => (
   <div className="group cursor-pointer flex-shrink-0 w-full sm:w-72 md:w-80 snap-start">
     <div className="relative h-64 w-full overflow-hidden rounded-lg mb-4">
       <img 
-        src={item.image} 
+        src="https://placehold.co/600x400/EEE/333?text=House" 
         alt={item.title} 
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        onError={(e) => { e.target.src = "https://placehold.co/600x400/EEE/333?text=House"; }}
       />
       
       {/* Heart Icon */}
@@ -138,7 +137,7 @@ const CityListings = () => {
           1. HERO SECTION + SEARCH BAR
       ========================================= */}
       <div className="relative h-[550px] w-full">
-        <img src={data.heroImage} alt={data.title} className="absolute inset-0 w-full h-full object-cover"/>
+        <img src="https://placehold.co/1920x800/222/EEE?text=City+Hero" alt={data.title} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-8 shadow-sm drop-shadow-md">{data.title}</h1>
@@ -156,7 +155,7 @@ const CityListings = () => {
               <div className="flex items-center justify-between cursor-pointer text-gray-900 font-medium"><span>Any Beds</span><span className="text-xs">▼</span></div>
             </div>
             <button
-             onClick={() => navigate('/search')} 
+             onClick={() => navigate(`/buy?query=${encodeURIComponent(cityName || '')}`)} 
              className="w-full md:w-auto bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-md font-bold text-sm transition uppercase tracking-wide">Search</button>
           </div>
         </div>
@@ -208,7 +207,7 @@ const CityListings = () => {
               </div>
             </div>
             <div className="order-1 lg:order-2 relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl">
-              <img src="https://images.unsplash.com/photo-1599809275371-b03330ff3536?auto=format&fit=crop&w=1200&q=80" alt="Chateau" className="absolute inset-0 w-full h-full object-cover" />
+              <img src="https://placehold.co/1200x500/EEE/333?text=Highlight" alt="Chateau" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </div>

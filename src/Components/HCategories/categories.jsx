@@ -39,10 +39,9 @@ const categoriesData = [
 const CategoryCard = ({ name, listings, imageUrl }) => (
   <div className="relative group h-[500px] rounded-lg overflow-hidden cursor-pointer">
     <img
-      src={imageUrl}
+      src={`https://placehold.co/600x800/333/FFF?text=${name}`}
       alt={name}
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-      onError={(e) => { e.target.src = `https://placehold.co/600x800/333/FFF?text=${name}`; }}
     />
     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
     <div className="absolute bottom-0 left-0 p-6 text-white">
@@ -137,10 +136,9 @@ const ListingCard = ({ listing }) => (
     <div className="relative group bg-white rounded-lg overflow-hidden shadow-sm">
       <div className="relative h-64 w-full">
         <img
-          src={listing.imageUrl}
+          src={`https://placehold.co/400x300/EEE/333?text=Property`}
           alt={listing.description}
           className="w-full h-full object-cover"
-          onError={(e) => { e.target.src = `https://placehold.co/400x300/EEE/333?text=Property`; }}
         />
         {/* Favorite Button */}
         <button className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-2 transition hover:bg-white">
@@ -262,10 +260,9 @@ const Journal = () => {
           {/* Main Article (Left) */}
           <div className="lg:col-span-2 relative group h-[600px] rounded-lg overflow-hidden cursor-pointer">
             <img
-              src={mainArticle.imageUrl}
+              src={`https://placehold.co/800x600/555/FFF?text=Journal`}
               alt={mainArticle.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-              onError={(e) => { e.target.src = `https://placehold.co/800x600/555/FFF?text=Journal`; }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 text-white">
@@ -280,10 +277,9 @@ const Journal = () => {
             {sideArticles.map((article) => (
               <a href="#" key={article.id} className="group flex gap-4">
                 <img
-                  src={article.imageUrl}
+                  src={`https://placehold.co/128x112/EEE/333?text=Article`}
                   alt={article.title}
                   className="w-32 h-28 object-cover rounded-md"
-                  onError={(e) => { e.target.src = `https://placehold.co/128x112/EEE/333?text=Article`; }}
                 />
                 <div className="flex-1">
                   <p className="text-xs font-medium tracking-widest text-gray-500 mb-1">{article.date}</p>

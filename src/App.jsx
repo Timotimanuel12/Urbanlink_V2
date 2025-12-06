@@ -14,6 +14,8 @@ import SellPropertyForm from './pages/JualRumah.jsx';
 import CityListings from './pages/CityListings.jsx';
 import SearchResults from './pages/SearchResults.jsx';
 import BuyProperty from './pages/BuyProperty.jsx';
+import Contact from './pages/Contact.jsx';
+import JoinAgent from './pages/JoinAgent.jsx';
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
             <Route path="/listings/:cityName" element={<CityListings />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/buy" element={<BuyProperty />} />     
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/join-agent" element={<JoinAgent />} />
           </Routes>
         </main>
         

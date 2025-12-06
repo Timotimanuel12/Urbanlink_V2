@@ -72,7 +72,7 @@ const ListingCard = ({ item }) => (
   <div className="group cursor-pointer">
     <div className="relative h-64 overflow-hidden rounded-lg mb-4">
       <img 
-        src={item.image} 
+        src="https://placehold.co/600x400/EEE/333?text=House" 
         alt={item.title} 
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
@@ -103,7 +103,7 @@ const PropertyPage = () => {
       <div className="relative h-[550px] w-full">
         {/* Background Image */}
         <img 
-          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80" 
+          src="https://placehold.co/1920x800/222/EEE?text=Hero" 
           alt="Luxury Hero" 
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -222,7 +222,7 @@ const PropertyPage = () => {
             {/* Image Side */}
             <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1599809275371-b03330ff3536?auto=format&fit=crop&w=1200&q=80" 
+                src="https://placehold.co/1200x500/EEE/333?text=Highlight" 
                 alt="Chateau" 
                 className="absolute inset-0 w-full h-full object-cover"
               />

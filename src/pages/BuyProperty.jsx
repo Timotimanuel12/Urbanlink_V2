@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { HeartIcon, AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 //
@@ -6,7 +7,7 @@ import { HeartIcon, AdjustmentsHorizontalIcon, MagnifyingGlassIcon } from '@hero
 const SearchCard = ({ item }) => (
   <div className="flex flex-col group cursor-pointer">
     <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
-      <img src={item.image} alt={item.address} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <img src="https://placehold.co/800x600/EEE/333?text=Property" alt={item.address} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
       <div className="absolute top-3 left-3 flex gap-2">
         {item.tags?.map((tag, idx) => (
           <span key={idx} className="bg-white/90 backdrop-blur px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-sm">{tag}</span>
@@ -26,7 +27,7 @@ const SearchCard = ({ item }) => (
         {item.agentImage && (
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-400">{item.agentName}</span>
-            <img src={item.agentImage} alt={item.agentName} className="w-6 h-6 rounded-full object-cover grayscale" />
+            <img src="https://placehold.co/24x24/EEE/333?text=U" alt={item.agentName} className="w-6 h-6 rounded-full object-cover grayscale" />
           </div>
         )}
       </div>
@@ -48,6 +49,7 @@ const baseResults = [
 const makeResults = (count = 48) => Array.from({ length: count }, (_, i) => ({ ...baseResults[i % baseResults.length], id: i + 1 }));
 
 const BuyProperty = () => {
+  const location = useLocation();
   const [page, setPage] = useState(1);
   const [visibleCount, setVisibleCount] = useState(8);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -67,12 +69,22 @@ const BuyProperty = () => {
   const paginated = useMemo(() => filtered.slice((page - 1) * perPage, (page - 1) * perPage + perPage), [filtered, page]);
   const shownItems = useMemo(() => paginated.slice(0, visibleCount), [paginated, visibleCount]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get('query') || '';
+    if (q) {
+      setFilters((f) => ({ ...f, query: q }));
+      setPage(1);
+      setVisibleCount(8);
+    }
+  }, [location.search]);
+
   return (
     <div className="pt-28 min-h-screen bg-white">
       <div className="relative h-[520px] w-full">
         <img
-          src="https://images.unsplash.com/photo-1555242083-39b33730316d?auto=format&fit=crop&w=1920&q=80"
-          alt="City skyline"
+          src="https://placehold.co/1920x800/222/EEE?text=Buy+Hero"
+          alt="Hero"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40" />

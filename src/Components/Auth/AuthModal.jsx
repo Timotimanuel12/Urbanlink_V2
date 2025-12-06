@@ -69,15 +69,15 @@ const AuthModal = ({ open, onClose }) => {
             <form onSubmit={handleLoginSubmit} className="p-6 space-y-4">
               <div className="space-y-3">
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=G" alt="Google" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with Google</span>
                 </button>
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=A" alt="Apple" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with Apple</span>
                 </button>
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="LinkedIn" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=IN" alt="LinkedIn" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with LinkedIn</span>
                 </button>
               </div>
@@ -147,15 +147,15 @@ const AuthModal = ({ open, onClose }) => {
             <form onSubmit={handleSignupSubmit} className="p-6 space-y-4">
               <div className="space-y-3">
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=G" alt="Google" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with Google</span>
                 </button>
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=A" alt="Apple" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with Apple</span>
                 </button>
                 <button type="button" className="w-full border rounded-md px-4 py-3 flex items-center justify-center gap-3 hover:bg-gray-50">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="LinkedIn" className="w-5 h-5" />
+                  <img src="https://placehold.co/20x20/EEE/333?text=IN" alt="LinkedIn" className="w-5 h-5" />
                   <span className="text-sm font-medium">Continue with LinkedIn</span>
                 </button>
               </div>
