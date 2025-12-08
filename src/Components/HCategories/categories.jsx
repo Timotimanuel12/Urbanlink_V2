@@ -247,7 +247,7 @@ const Journal = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Article (Left) */}
-          <div className="lg:col-span-2 relative group h-[600px] rounded-lg overflow-hidden cursor-pointer">
+          <Link to="/journal" className="lg:col-span-2 relative group h-[600px] rounded-lg overflow-hidden cursor-pointer block">
             <img
               src={`https://placehold.co/800x600/555/FFF?text=Journal`}
               alt={mainArticle.title}
@@ -259,12 +259,12 @@ const Journal = () => {
               <h3 className="text-3xl font-serif mb-3">{mainArticle.title}</h3>
               <p className="text-sm opacity-90 max-w-2xl">{mainArticle.description}</p>
             </div>
-          </div>
+          </Link>
 
           {/* Side Articles (Right) */}
           <div className="lg:col-span-1 flex flex-col gap-6">
             {sideArticles.map((article) => (
-              <a href="#" key={article.id} className="group flex gap-4">
+              <Link to="/journal" key={article.id} className="group flex gap-4">
                 <img
                   src={`https://placehold.co/128x112/EEE/333?text=Article`}
                   alt={article.title}
@@ -275,12 +275,12 @@ const Journal = () => {
                   <h4 className="text-base font-serif font-medium text-black group-hover:underline">{article.title}</h4>
                   <p className="text-sm text-gray-600 hidden md:block">{article.description.substring(0, 60)}...</p>
                 </div>
-              </a>
+              </Link>
             ))}
-            <button className="flex items-center gap-2 text-sm font-semibold text-black hover:underline">
+            <Link to="/journal" className="flex items-center gap-2 text-sm font-semibold text-black hover:underline">
               Read all articles
               <ArrowRightIcon className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
 
         </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { HeartIcon, ShareIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
 const sampleProperty = {
@@ -30,7 +29,6 @@ const sampleProperty = {
 };
 
 const PropertyDetails = () => {
-  const { id } = useParams();
   const property = sampleProperty;
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // --- Helper Functions ---
 
@@ -107,7 +107,7 @@ const KprCalculator = () => {
 
   // --- Main Calculation Function ---
 
-  const handleCalculate = () => {
+  const handleCalculate = useCallback(() => {
     const termsInYears = [5, 10, 15, 20, 25];
     const principal = loanAmount;
     const annualRate = parseFloat(interestRate) || 0;
@@ -123,12 +123,12 @@ const KprCalculator = () => {
     });
     
     setInstallments(results);
-  };
+  }, [loanAmount, interestRate]);
 
   // Run calculation on initial load to populate the right side
   useEffect(() => {
     handleCalculate();
-  }, []); // Empty dependency array means this runs once on mount
+  }, [handleCalculate]);
 
   // --- New component for the description text ---
   const KprDescription = () => (
