@@ -69,48 +69,143 @@ const cityDatabase = {
 };
 
 // ==========================================
-// 2. DATA: HOMES YOU'LL LOVE
+// 2. DATA: HOMES YOU'LL LOVE (Updated to IDR & Indonesia)
 // ==========================================
 const recommendedHomes = [
-  { id: 101, price: '$4,750,000', location: 'Geilo, Viken, Norway', title: 'Luxury Ski Chalet', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80' },
-  { id: 102, price: '€14,500,000', location: 'Umbria, Italy', title: 'Historic Castle Estate', image: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe865?auto=format&fit=crop&w=800&q=80' },
-  { id: 103, price: '$28,000,000', location: 'Texas, United States', title: 'Hill Country Ranch', image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80' },
-  { id: 104, price: '$2,500,000', location: 'Bali, Indonesia', title: 'Cliffside Villa', image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80' },
+  { 
+    id: 101, 
+    price: 'Rp 65.000.000.000', 
+    location: 'Pondok Indah, Jakarta Selatan', 
+    title: 'Golf Course Mansion', 
+    image: 'https://images.unsplash.com/photo-1613490493576-b0fa6cd84274?auto=format&fit=crop&w=800&q=80' 
+  },
+  { 
+    id: 102, 
+    price: 'Rp 12.500.000.000', 
+    location: 'BSD City, Tangerang Selatan', 
+    title: 'Modern Tropical Estate', 
+    image: 'https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=800&q=80' 
+  },
+  { 
+    id: 103, 
+    price: 'Rp 42.000.000.000', 
+    location: 'PIK 2, Jakarta Utara', 
+    title: 'Waterfront Villa', 
+    image: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80' 
+  },
+  { 
+    id: 104, 
+    price: 'Rp 8.500.000.000', 
+    location: 'Sentul City, Bogor', 
+    title: 'Highland Retreat', 
+    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80' 
+  },
 ];
 
 // ==========================================
-// 3. DATA: TRENDING HOMES
+// 3. DATA: TRENDING HOMES (Updated to IDR & Indonesia)
 // ==========================================
 const trendingHomes = [
-  { id: 201, price: '$4,636,493', location: 'Valencia, Spain', title: 'House in Albaida', image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80', isVideo: true },
-  { id: 202, price: '$4,748,056', location: 'Viken, Norway', title: 'Chalet in Geilo', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', isVideo: false },
-  { id: 203, price: '$2,750,000', location: 'Dubai, UAE', title: 'Apartment in Dubai', image: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80', isVideo: true },
-  { id: 204, price: '$8,000,000', location: 'Raa Atoll, Maldives', title: 'Private Island', image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80', isVideo: false },
-  { id: 205, price: '$3,998,975', location: 'Benahavis, Spain', title: 'Villa in Benahavis', image: 'https://images.unsplash.com/photo-1600585154340-9b04b3a86c34?auto=format&fit=crop&w=800&q=80', isVideo: false },
+  { 
+    id: 201, 
+    price: 'Rp 85.000.000.000', 
+    location: 'Menteng, Jakarta Pusat', 
+    title: 'Colonial Heritage House', 
+    image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80', 
+    isVideo: true 
+  },
+  { 
+    id: 202, 
+    price: 'Rp 18.500.000.000', 
+    location: 'Alam Sutera, Tangerang Selatan', 
+    title: 'Contemporary Glass Home', 
+    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80', 
+    isVideo: false 
+  },
+  { 
+    id: 203, 
+    price: 'Rp 28.000.000.000', 
+    location: 'Kelapa Gading, Jakarta Utara', 
+    title: 'Grand Luxury Estate', 
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80', 
+    isVideo: true 
+  },
+  { 
+    id: 204, 
+    price: 'Rp 5.200.000.000', 
+    location: 'Rancamaya, Bogor', 
+    title: 'Golf View Villa', 
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80', 
+    isVideo: false 
+  },
+  { 
+    id: 205, 
+    price: 'Rp 55.000.000.000', 
+    location: 'Senopati, Jakarta Selatan', 
+    title: 'Modern Townhouse', 
+    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80', 
+    isVideo: false 
+  },
 ];
 
 // ==========================================
-// 4. DATA: NEW TO MARKET (NEW SECTION!)
+// 4. DATA: NEW TO MARKET (Updated to IDR & Indonesia)
 // ==========================================
 const newToMarketHomes = [
-  { id: 301, price: '$700,000', location: 'Marbella, Spain', title: 'House in Nueva Andalucia', image: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80', tags: ['Video', 'New 5 days ago'] },
-  { id: 302, price: '$75,000,000', location: 'Key Largo, Florida', title: 'Oceanfront Sanctuary', image: 'https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80', tags: ['Video'] },
-  { id: 303, price: '$19,750,000', location: 'Franklin, Tennessee', title: 'Southern Estate', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', tags: [] },
-  { id: 304, price: '$29,995,000', location: 'Beverly Hills, CA', title: 'Modern Masterpiece', image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', tags: [] },
-  { id: 305, price: '$10,950,000', location: 'Snowmass, Colorado', title: 'Mountain Retreat', image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80', tags: [] },
+  { 
+    id: 301, 
+    price: 'Rp 9.800.000.000', 
+    location: 'Bintaro Jaya, Tangerang Selatan', 
+    title: 'Designer Family Home', 
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', 
+    tags: ['Video', 'New 2 days ago'] 
+  },
+  { 
+    id: 302, 
+    price: 'Rp 72.000.000.000', 
+    location: 'Kebayoran Baru, Jakarta Selatan', 
+    title: 'Grand Residence', 
+    image: 'https://images.unsplash.com/photo-1600596542815-60078d5dba0d?auto=format&fit=crop&w=800&q=80', 
+    tags: ['Video'] 
+  },
+  { 
+    id: 303, 
+    price: 'Rp 22.000.000.000', 
+    location: 'Pluit, Jakarta Utara', 
+    title: 'Modern Tropical Villa', 
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80', 
+    tags: [] 
+  },
+  { 
+    id: 304, 
+    price: 'Rp 4.500.000.000', 
+    location: 'Vimala Hills, Bogor', 
+    title: 'Resort Villa', 
+    image: 'https://images.unsplash.com/photo-1592595896551-f76cd97ad974?auto=format&fit=crop&w=800&q=80', 
+    tags: [] 
+  },
+  { 
+    id: 305, 
+    price: 'Rp 38.000.000.000', 
+    location: 'Kemang, Jakarta Selatan', 
+    title: 'Private Pool Compound', 
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', 
+    tags: [] 
+  },
 ];
 
 // ==========================================
-// 5. COMPONENT: LISTING CARD (UPDATED WITH TAGS)
+// 5. COMPONENT: LISTING CARD
 // ==========================================
 
 const ListingCard = ({ item }) => (
   <Link to={`/property/${item.id}`} className="group cursor-pointer flex-shrink-0 w-full sm:w-72 md:w-80 snap-start">
     <div className="relative h-64 w-full overflow-hidden rounded-lg mb-4">
       <img 
-        src="https://placehold.co/600x400/EEE/333?text=House" 
+        src={item.image} 
         alt={item.title} 
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        onError={(e) => { e.target.src = "https://placehold.co/600x400/EEE/333?text=House"; }}
       />
       
       {/* Heart Icon */}
@@ -205,7 +300,7 @@ const CityListings = () => {
               <div className="flex items-center justify-between cursor-pointer text-gray-900 font-medium"><span>Any Beds</span><span className="text-xs">▼</span></div>
             </div>
             <button
-             onClick={() => navigate(`/buy?query=${encodeURIComponent(searchQuery || '')}`)} 
+             onClick={() => navigate(`/buy?query=${encodeURIComponent(searchQuery || '')}`)}
              className="w-full md:w-auto bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-md font-bold text-sm transition uppercase tracking-wide">Search</button>
           </div>
         </div>
@@ -249,15 +344,15 @@ const CityListings = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <p className="font-serif text-3xl mb-4">Weekly Highlight</p>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Vesoul, Bourgogne-Franche-Comté, France</h3>
-              <p className="text-gray-600 leading-relaxed mb-8">In the heart of the Haute-Saône region, the charming small town of Filain, nestled between Vesoul and Rioz, is home to this 15th-century gem, a listed Historic Monument: the Château de Filain.</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">The Sanctuary Collection, Sentul Selatan</h3>
+              <p className="text-gray-600 leading-relaxed mb-8">Nestled in the lush greenery of Sentul, this architectural marvel offers breathtaking mountain views and resort-style living. Featuring open-plan tropical design, a private infinity pool, and exclusive access to the area's premier golf course.</p>
               <div className="flex items-end gap-8 mb-8">
-                <div><p className="text-2xl font-bold">$2,086,421</p><p className="text-sm text-gray-500">10 Beds • 3 Baths • 1500 Sqm</p></div>
+                <div><p className="text-2xl font-bold">Rp 28.500.000.000</p><p className="text-sm text-gray-500">6 Beds • 7 Baths • 850 Sqm</p></div>
                 <button className="text-black font-bold border-b-2 border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition">Read more</button>
               </div>
             </div>
             <div className="order-1 lg:order-2 relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl">
-              <img src="https://placehold.co/1200x500/EEE/333?text=Highlight" alt="Chateau" className="absolute inset-0 w-full h-full object-cover" />
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="Luxury Highlight" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </div>
