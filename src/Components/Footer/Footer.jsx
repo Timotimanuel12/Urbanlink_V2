@@ -1,15 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // --- SVG Icon Components for the Footer ---
 
 // Logo (white text)
 const Logo = () => (
   <div className="flex items-center space-x-2">
-    {/* This is a placeholder for your new logo from the image. 
-        If you have an SVG or image URL, it can be placed here.
-        For now, I'll use a styled text logo. */}
-        <p></p>
-        <p></p>
     <span className="text-3xl font-bold text-white">Urbanlink.</span>
   </div>
 );
@@ -41,62 +37,55 @@ const LocationLink = ({ children }) => (
 
 // --- The Main Footer Component ---
 const Footer = () => {
-    return (
-        // Kept the darker, more subtle gradient
-        <footer className="bg-gradient-to-r from-slate-900 to-blue-950 text-white">
-            <div className="container mx-auto px-6 py-12">
-                {/* New 3-Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    {/* Column 1: Temukan Properti */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-4 text-lg">Temukan Properti</h4>
-                        <ul className="space-y-3 text-sm text-gray-300">
-                            <LocationLink>Jakarta Selatan</LocationLink>
-                            <LocationLink>Tangerang Selatan</LocationLink>
-                            <LocationLink>Depok</LocationLink>
-                            <LocationLink>Bekasi</LocationLink>
-                            <LocationLink>Bogor</LocationLink>
-                            <LocationLink>Kota Tangerang</LocationLink>
-                            <LocationLink>Kabupaten Tangerang</LocationLink>
-                            <LocationLink>Jakarta Barat</LocationLink>
-                            <LocationLink>Jakarta Timur</LocationLink>
-                            <LocationLink>Jakarta Utara</LocationLink>
-                            <LocationLink>Cibubur</LocationLink>
-                        </ul>
-                    </div>
-
-                    {/* Column 2: Bantuan */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-4 text-lg">Bantuan</h4>
-                        <ul className="space-y-3 text-sm text-gray-300">
-                            <li><a href="#" className="hover:text-white hover:underline transition-colors duration-200">Artikel</a></li>
-                            <li><a href="#" className="hover:text-white hover:underline transition-colors duration-200">Tentang Kami</a></li>
-                            <li><a href="#" className="hover:text-white hover:underline transition-colors duration-200">Hubungi Kami</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 3: Customer Support */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-4 text-lg">Customer Support</h4>
-                        <div className="flex items-center text-gray-100 mb-4">
-                            <PhoneIcon className="w-5 h-5 mr-2" />
-                            <span className="font-semibold text-lg">0881-0100-53862</span>
-                        </div>
-                        
-                        <h5 className="font-semibold text-white mb-3 mt-6">Konsultasikan Kebutuhanmu</h5>
-                        {/* Placeholder for the new Urbanlink logo from the image */}
-                        <div className="w-36">
-                            {/* Using the text logo for now. You can replace this with an <img> tag. */}
-                            <Logo /> 
-                        </div>
-                    </div>
-                </div>
-
-                {/* Removed the old bottom bar */}
+  return (
+    <footer className="bg-black text-white">
+      <div className="max-w-screen-2xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="space-y-4">
+            <Logo />
+            <p className="text-sm text-gray-300">Marketplace properti mewah dengan kurasi terbaik.</p>
+            <div className="flex items-center text-gray-100">
+              <PhoneIcon className="w-5 h-5 mr-2" />
+              <span className="font-semibold">0881-0100-53862</span>
             </div>
-        </footer>
-    );
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4 text-lg">Jelajahi</h4>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li><Link to="/buy" className="hover:text-white hover:underline">Beli Properti</Link></li>
+              <li><Link to="/search" className="hover:text-white hover:underline">Pencarian</Link></li>
+              <li><Link to="/listings/jakarta-selatan" className="hover:text-white hover:underline">Jakarta Selatan</Link></li>
+              <li><Link to="/listings/tangerang-selatan" className="hover:text-white hover:underline">Tangerang Selatan</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4 text-lg">Perusahaan</h4>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li><Link to="/journal" className="hover:text-white hover:underline">The Urban's Journal</Link></li>
+              <li><Link to="/contact" className="hover:text-white hover:underline">Hubungi Kami</Link></li>
+              <li><Link to="/join-agent" className="hover:text-white hover:underline">Bergabung jadi Agen</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4 text-lg">Berlangganan</h4>
+            <p className="text-sm text-gray-300 mb-4">Dapatkan artikel dan listing terbaru setiap minggu.</p>
+            <form className="flex gap-2">
+              <input type="email" placeholder="Email Anda" className="flex-1 px-4 py-3 rounded-md bg-white/10 text-white placeholder-gray-300 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/40" />
+              <button type="button" className="px-5 py-3 rounded-md bg-white text-black font-semibold">Kirim</button>
+            </form>
+          </div>
+        </div>
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
+          <span>© {new Date().getFullYear()} Urbanlink. All rights reserved.</span>
+          <div className="flex gap-6">
+            <Link to="/journal" className="hover:text-white">Journal</Link>
+            <Link to="/buy" className="hover:text-white">Buy</Link>
+            <Link to="/contact" className="hover:text-white">Contact</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

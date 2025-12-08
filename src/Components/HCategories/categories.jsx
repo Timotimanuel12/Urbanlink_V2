@@ -208,6 +208,7 @@ const Trending = () => {
 
 // Mock data for Journal entries
 const mainArticle = {
+  id: 1,
   date: '13 NOV 2025',
   title: "ELIRE: Prime Branded Residences in the Heart of Dubai's Booming Business Bay",
   description: 'ELIRE represents a paradigm shift in Dubai\'s luxury residential market. Developed by QUBE Develop...',
@@ -247,7 +248,7 @@ const Journal = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Article (Left) */}
-          <Link to="/journal" className="lg:col-span-2 relative group h-[600px] rounded-lg overflow-hidden cursor-pointer block">
+          <Link to={`/journal/${mainArticle.id}`} className="lg:col-span-2 relative group h-[600px] rounded-lg overflow-hidden cursor-pointer block">
             <img
               src={`https://placehold.co/800x600/555/FFF?text=Journal`}
               alt={mainArticle.title}
@@ -264,7 +265,7 @@ const Journal = () => {
           {/* Side Articles (Right) */}
           <div className="lg:col-span-1 flex flex-col gap-6">
             {sideArticles.map((article) => (
-              <Link to="/journal" key={article.id} className="group flex gap-4">
+              <Link to={`/journal/${article.id}`} key={article.id} className="group flex gap-4">
                 <img
                   src={`https://placehold.co/128x112/EEE/333?text=Article`}
                   alt={article.title}
